@@ -162,13 +162,20 @@ export function AppSidebar({ session, ...props }: AppSidebarProps) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <a href="/" className="group/home">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <Cloud />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">Loli Forum</span>
-                  <span className="truncate text-xs">Dashboard</span>
+                  <div className="relative h-4 overflow-hidden">
+                    <span className="absolute truncate text-xs transition-transform duration-300 ease-in-out group-hover/home:-translate-y-4 group-hover/home:opacity-0">
+                      Dashboard
+                    </span>
+                    <span className="absolute truncate text-xs transition-transform duration-300 ease-in-out translate-y-4 opacity-0 group-hover/home:translate-y-0 group-hover/home:opacity-100">
+                      Back to home page
+                    </span>
+                  </div>
                 </div>
               </a>
             </SidebarMenuButton>
