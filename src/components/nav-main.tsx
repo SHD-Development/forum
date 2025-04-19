@@ -30,22 +30,27 @@ export function NavMain({
     items?: {
       title: string;
       url: string;
+      isActive?: boolean;
     }[];
   }[];
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>Forum</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={item.title}>
-                <a href={item.url}>
-                  <item.icon />
-                  <span>{item.title}</span>
-                </a>
-              </SidebarMenuButton>
+              <CollapsibleTrigger asChild>
+                <SidebarMenuButton asChild tooltip={item.title}>
+                  <div>
+                    {/* <a href={item.url}> */}
+                    <item.icon />
+                    <span className="select-none">{item.title}</span>
+                    {/* </a> */}
+                  </div>
+                </SidebarMenuButton>
+              </CollapsibleTrigger>
               {item.items?.length ? (
                 <>
                   <CollapsibleTrigger asChild>
@@ -58,7 +63,10 @@ export function NavMain({
                     <SidebarMenuSub>
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
-                          <SidebarMenuSubButton asChild>
+                          <SidebarMenuSubButton
+                            asChild
+                            isActive={subItem.isActive}
+                          >
                             <a href={subItem.url}>
                               <span>{subItem.title}</span>
                             </a>

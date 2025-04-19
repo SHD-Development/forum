@@ -13,6 +13,13 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { AppSidebar } from "@/components/app-sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import { auth } from "@/auth";
 
 // import { unstable_ViewTransition as ViewTransition } from "react";
 const geistSans = Geist({
@@ -30,11 +37,13 @@ export const metadata: Metadata = {
   description: "Love loli!",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -46,7 +55,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TooltipProvider>{children}</TooltipProvider>
+          <TooltipProvider>
+            <SidebarProvider>
+              <AppSidebar session={session} />
+              <SidebarInset>{children}</SidebarInset>
+            </SidebarProvider>
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

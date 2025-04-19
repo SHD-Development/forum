@@ -1,12 +1,12 @@
-import * as React from "react"
-import type { Editor } from "@tiptap/react"
-import type { Content, UseEditorOptions } from "@tiptap/react"
-import { StarterKit } from "@tiptap/starter-kit"
-import { useEditor } from "@tiptap/react"
-import { Typography } from "@tiptap/extension-typography"
-import { Placeholder } from "@tiptap/extension-placeholder"
-import { Underline } from "@tiptap/extension-underline"
-import { TextStyle } from "@tiptap/extension-text-style"
+import * as React from "react";
+import type { Editor } from "@tiptap/react";
+import type { Content, UseEditorOptions } from "@tiptap/react";
+import { StarterKit } from "@tiptap/starter-kit";
+import { useEditor } from "@tiptap/react";
+import { Typography } from "@tiptap/extension-typography";
+import { Placeholder } from "@tiptap/extension-placeholder";
+import { Underline } from "@tiptap/extension-underline";
+import { TextStyle } from "@tiptap/extension-text-style";
 import {
   Link,
   Image,
@@ -17,22 +17,22 @@ import {
   UnsetAllMarks,
   ResetMarksOnEnter,
   FileHandler,
-} from "../extensions"
-import { cn } from "@/lib/utils"
-import { fileToBase64, getOutput, randomId } from "../utils"
-import { useThrottle } from "../hooks/use-throttle"
-import { toast } from "sonner"
-
+} from "../extensions";
+import { cn } from "@/lib/utils";
+import { fileToBase64, getOutput, randomId } from "../utils";
+import { useThrottle } from "../hooks/use-throttle";
+import { toast } from "sonner";
+import axios from "axios";
 export interface UseMinimalTiptapEditorProps extends UseEditorOptions {
-  value?: Content
-  output?: "html" | "json" | "text"
-  placeholder?: string
-  editorClassName?: string
-  throttleDelay?: number
-  onUpdate?: (content: Content) => void
-  onBlur?: (content: Content) => void
+  value?: Content;
+  output?: "html" | "json" | "text";
+  placeholder?: string;
+  editorClassName?: string;
+  throttleDelay?: number;
+  onUpdate?: (content: Content) => void;
+  onBlur?: (content: Content) => void;
 }
-
+import appConfig from "@/config";
 const createExtensions = (placeholder: string) => [
   StarterKit.configure({
     horizontalRule: false,
@@ -49,27 +49,29 @@ const createExtensions = (placeholder: string) => [
   Underline,
   Image.configure({
     allowedMimeTypes: ["image/*"],
-    maxFileSize: 5 * 1024 * 1024,
-    allowBase64: true,
+    maxFileSize: appConfig.maxFileSize,
+    allowBase64: false,
     uploadFn: async (file) => {
-      // NOTE: This is a fake upload function. Replace this with your own upload logic.
-      // This function should return the uploaded image URL.
-
-      // wait 3s to simulate upload
-      await new Promise((resolve) => setTimeout(resolve, 3000))
-
-      const src = await fileToBase64(file)
-
-      // either return { id: string | number, src: string } or just src
-      // return src;
-      return { id: randomId(), src }
+      const res = await axios.post(
+        `${process.env.FILE_STORAGE_URL}/api/file`,
+        {
+          file: file,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.FILE_STORAGE_KEY}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return res.data.url;
     },
     onToggle(editor, files, pos) {
       editor.commands.insertContentAt(
         pos,
         files.map((image) => {
-          const blobUrl = URL.createObjectURL(image)
-          const id = randomId()
+          const blobUrl = URL.createObjectURL(image);
+          const id = randomId();
 
           return {
             type: "image",
@@ -80,42 +82,42 @@ const createExtensions = (placeholder: string) => [
               title: image.name,
               fileName: image.name,
             },
-          }
+          };
         })
-      )
+      );
     },
     onImageRemoved({ id, src }) {
-      console.log("Image removed", { id, src })
+      console.log("Image removed", { id, src });
     },
     onValidationError(errors) {
       errors.forEach((error) => {
         toast.error("Image validation error", {
           position: "bottom-right",
           description: error.reason,
-        })
-      })
+        });
+      });
     },
     onActionSuccess({ action }) {
       const mapping = {
         copyImage: "Copy Image",
         copyLink: "Copy Link",
         download: "Download",
-      }
+      };
       toast.success(mapping[action], {
         position: "bottom-right",
         description: "Image action success",
-      })
+      });
     },
     onActionError(error, { action }) {
       const mapping = {
         copyImage: "Copy Image",
         copyLink: "Copy Link",
         download: "Download",
-      }
+      };
       toast.error(`Failed to ${mapping[action]}`, {
         position: "bottom-right",
         description: error.message,
-      })
+      });
     },
   }),
   FileHandler.configure({
@@ -124,29 +126,29 @@ const createExtensions = (placeholder: string) => [
     maxFileSize: 5 * 1024 * 1024,
     onDrop: (editor, files, pos) => {
       files.forEach(async (file) => {
-        const src = await fileToBase64(file)
+        const src = await fileToBase64(file);
         editor.commands.insertContentAt(pos, {
           type: "image",
           attrs: { src },
-        })
-      })
+        });
+      });
     },
     onPaste: (editor, files) => {
       files.forEach(async (file) => {
-        const src = await fileToBase64(file)
+        const src = await fileToBase64(file);
         editor.commands.insertContent({
           type: "image",
           attrs: { src },
-        })
-      })
+        });
+      });
     },
     onValidationError: (errors) => {
       errors.forEach((error) => {
         toast.error("Image validation error", {
           position: "bottom-right",
           description: error.reason,
-        })
-      })
+        });
+      });
     },
   }),
   Color,
@@ -158,7 +160,7 @@ const createExtensions = (placeholder: string) => [
   ResetMarksOnEnter,
   CodeBlockLowlight,
   Placeholder.configure({ placeholder: () => placeholder }),
-]
+];
 
 export const useMinimalTiptapEditor = ({
   value,
@@ -173,26 +175,26 @@ export const useMinimalTiptapEditor = ({
   const throttledSetValue = useThrottle(
     (value: Content) => onUpdate?.(value),
     throttleDelay
-  )
+  );
 
   const handleUpdate = React.useCallback(
     (editor: Editor) => throttledSetValue(getOutput(editor, output)),
     [output, throttledSetValue]
-  )
+  );
 
   const handleCreate = React.useCallback(
     (editor: Editor) => {
       if (value && editor.isEmpty) {
-        editor.commands.setContent(value)
+        editor.commands.setContent(value);
       }
     },
     [value]
-  )
+  );
 
   const handleBlur = React.useCallback(
     (editor: Editor) => onBlur?.(getOutput(editor, output)),
     [output, onBlur]
-  )
+  );
 
   const editor = useEditor({
     extensions: createExtensions(placeholder),
@@ -208,9 +210,9 @@ export const useMinimalTiptapEditor = ({
     onCreate: ({ editor }) => handleCreate(editor),
     onBlur: ({ editor }) => handleBlur(editor),
     ...props,
-  })
+  });
 
-  return editor
-}
+  return editor;
+};
 
-export default useMinimalTiptapEditor
+export default useMinimalTiptapEditor;
