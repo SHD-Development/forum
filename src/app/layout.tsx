@@ -13,7 +13,7 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { TooltipProvider } from "@/components/ui/tooltip";
-
+import { Toaster } from "react-hot-toast";
 // import { unstable_ViewTransition as ViewTransition } from "react";
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,6 +47,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>{children}</TooltipProvider>
+          <Toaster position="top-center" />
         </ThemeProvider>
       </body>
     </html>

@@ -56,6 +56,11 @@ export function AppSidebar({ session, ...props }: AppSidebarProps) {
         isActive: isPathActive("/dashboard/post"),
         items: [
           {
+            title: "Posts Overview",
+            url: "/dashboard/post/overview",
+            isActive: isPathActive("/dashboard/post/overview"),
+          },
+          {
             title: "Create Posts",
             url: "/dashboard/post/create",
             isActive: isPathActive("/dashboard/post/create"),

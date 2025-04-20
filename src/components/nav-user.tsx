@@ -27,6 +27,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
+import ThemeSwitch from "@/components/theme-switch";
 export function NavUser({ user }: { user: any }) {
   const { isMobile } = useSidebar();
 
@@ -74,6 +75,9 @@ export function NavUser({ user }: { user: any }) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <ThemeSwitch />
+              </DropdownMenuItem>
               <DropdownMenuItem>
                 <Sparkles />
                 Upgrade to Pro

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   description: "Love loli!",
 };
 
-export default async function RootLayout({
+export default async function DashbaordLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -45,24 +45,9 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TooltipProvider>
-            <SidebarProvider>
-              <AppSidebar session={session} />
-              <SidebarInset>{children}</SidebarInset>
-            </SidebarProvider>
-          </TooltipProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <SidebarProvider>
+      <AppSidebar session={session} />
+      <SidebarInset>{children}</SidebarInset>
+    </SidebarProvider>
   );
 }
