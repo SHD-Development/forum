@@ -12,6 +12,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
+import { SessionProvider } from "next-auth/react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "react-hot-toast";
 // import { unstable_ViewTransition as ViewTransition } from "react";
@@ -46,8 +47,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TooltipProvider>{children}</TooltipProvider>
-          <Toaster position="top-center" />
+          {" "}
+          <SessionProvider>
+            <TooltipProvider>{children}</TooltipProvider>
+            <Toaster position="top-center" />{" "}
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>
