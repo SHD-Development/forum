@@ -25,7 +25,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { TiptapHTMLRenderer } from "@/components/tiptap-renderer";
-import { auth } from "@/auth";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import toast from "react-hot-toast";
 interface Post {
   id: number;
   title: string;
@@ -48,7 +53,10 @@ export default function PostDetailPage() {
   const [post, setPost] = useState<Post | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  const shareLink = () => {
+    navigator.clipboard.writeText(`${window.location.origin}/post/${postId}`);
+    toast.success("Copied link to clipboard!");
+  };
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -79,7 +87,7 @@ export default function PostDetailPage() {
         <div className="container max-w-4xl mx-auto py-6 px-4">
           <Button variant="ghost" className="mb-6 hover:bg-gray-800" disabled>
             <ChevronLeft className="mr-2 h-4 w-4" />
-            返回主頁
+            Back
           </Button>
 
           <Card className="bg-gray-900 border-gray-800 overflow-hidden shadow-xl">
@@ -120,7 +128,7 @@ export default function PostDetailPage() {
             <a href="/">
               <Button>
                 <ChevronLeft className="mr-2 h-4 w-4" />
-                返回主頁
+                Back
               </Button>
             </a>
           </div>
@@ -130,14 +138,17 @@ export default function PostDetailPage() {
   }
 
   const formattedDate = format(new Date(post.createdAt), "yyyy-MM-dd HH:mm");
-
+  const formattedUpdateDate = format(
+    new Date(post.updatedAt),
+    "yyyy-MM-dd HH:mm"
+  );
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
       <div className="container max-w-4xl mx-auto py-6 px-4">
         <a href="/">
           <Button variant="ghost" className="mb-6 hover:bg-gray-800">
             <ChevronLeft className="mr-2 h-4 w-4" />
-            返回主頁
+            Back
           </Button>
         </a>
         <Card className="bg-gray-900 border-gray-800 overflow-hidden shadow-xl">
@@ -171,14 +182,25 @@ export default function PostDetailPage() {
                       <p className="font-medium">
                         {post.author.name || "匿名用戶"}
                       </p>
-                      <p className="text-sm text-gray-400">{formattedDate}</p>
+                      <Tooltip>
+                        <TooltipTrigger className="text-sm text-gray-400 cursor-pointer">
+                          <p className="text-sm text-gray-400">
+                            {formattedDate}
+                          </p>
+                        </TooltipTrigger>
+                        <TooltipContent className="bg-zinc-900">
+                          <p className="text-sm dark:text-white">
+                            Last Updated: {formattedUpdateDate}
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
                     </div>
                   </div>
                   <Badge
                     variant="outline"
                     className="text-blue-400 border-blue-400"
                   >
-                    原創文章
+                    Original
                   </Badge>
                 </div>
               </div>
@@ -194,13 +216,16 @@ export default function PostDetailPage() {
                   className="bg-gray-800 border-gray-700"
                 >
                   <DropdownMenuItem className="cursor-pointer hover:bg-gray-700">
-                    收藏文章
+                    Favorite
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer hover:bg-gray-700">
-                    分享連結
+                  <DropdownMenuItem
+                    className="cursor-pointer hover:bg-gray-700"
+                    onClick={shareLink}
+                  >
+                    Share Link
                   </DropdownMenuItem>
                   <DropdownMenuItem className="cursor-pointer hover:bg-gray-700 text-red-400">
-                    舉報
+                    Report
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -220,15 +245,19 @@ export default function PostDetailPage() {
               <div className="flex space-x-4 items-center">
                 <Button variant="ghost" className="flex items-center space-x-2">
                   <Heart className="h-5 w-5" />
-                  <span>喜歡</span>
+                  <span>Like</span>
                 </Button>
                 <Button variant="ghost" className="flex items-center space-x-2">
                   <MessageSquare className="h-5 w-5" />
-                  <span>評論</span>
+                  <span>Comment</span>
                 </Button>
-                <Button variant="ghost" className="flex items-center space-x-2">
+                <Button
+                  variant="ghost"
+                  className="flex items-center space-x-2"
+                  onClick={shareLink}
+                >
                   <Share2 className="h-5 w-5" />
-                  <span>分享</span>
+                  <span>Share</span>
                 </Button>
               </div>
               {post.author.id === session?.user?.id && (
@@ -237,13 +266,13 @@ export default function PostDetailPage() {
                     variant="outline"
                     className="border-blue-500 text-blue-500 hover:bg-blue-500/10"
                   >
-                    編輯
+                    Edit Post
                   </Button>
                   <Button
                     variant="outline"
                     className="border-red-500 text-red-500 hover:bg-red-500/10"
                   >
-                    刪除
+                    Delete Post
                   </Button>
                 </div>
               )}
@@ -252,10 +281,10 @@ export default function PostDetailPage() {
         </Card>
 
         <Card className="bg-gray-900 border-gray-800 mt-6 p-6 shadow-xl">
-          <h2 className="text-xl font-bold mb-4">評論</h2>
+          <h2 className="text-xl font-bold mb-4">Comments</h2>
           <div className="space-y-4">
             {/* Todo: Comment component */}
-            <p className="text-gray-400 text-center py-8">尚無評論</p>
+            <p className="text-gray-400 text-center py-8">Be the first?</p>
           </div>
         </Card>
       </div>
