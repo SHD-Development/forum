@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const limit = parseInt(searchParams.get("limit") || "10");
+    const limit = parseInt(searchParams.get("limit") || "16");
     const page = parseInt(searchParams.get("page") || "1");
     const skip = (page - 1) * limit;
 
@@ -27,10 +27,16 @@ export async function GET(request: NextRequest) {
       },
     });
 
+    const formattedPosts = posts.map((post) => ({
+      ...post,
+      createdAt: post.createdAt.toISOString(),
+      updatedAt: post.updatedAt.toISOString(),
+    }));
+
     const totalPosts = await prisma.post.count();
 
     return NextResponse.json({
-      posts,
+      posts: formattedPosts,
       pagination: {
         total: totalPosts,
         pages: Math.ceil(totalPosts / limit),
@@ -53,7 +59,7 @@ export async function POST(request: NextRequest) {
     const session = await auth();
 
     if (!session || !session.user?.id) {
-      return NextResponse.json({ error: session }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const formData = await request.formData();

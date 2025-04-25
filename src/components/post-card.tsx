@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Post, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import {
   Card,
   CardContent,
@@ -17,12 +17,18 @@ import { AlertCircle } from "lucide-react";
 import { JSONContent } from "@tiptap/react";
 import { TiptapTextGenerator } from "./tiptap-text-generator";
 import appConfig from "@/config";
-type PostWithAuthor = Post & {
+
+type Post = {
+  id: string;
+  title: string;
+  cover: string | null;
+  content: any;
+  createdAt: string | Date;
   author: Pick<User, "name" | "image">;
 };
 
 interface PostCardProps {
-  post: PostWithAuthor;
+  post: Post;
 }
 
 function isValidUrl(url: string | null | undefined): boolean {
@@ -56,6 +62,11 @@ export function PostCard({ post }: PostCardProps) {
     isCoverUrlValid,
     isAuthorImageUrlValid,
   ]);
+
+  const createdAt =
+    typeof post.createdAt === "string"
+      ? new Date(post.createdAt)
+      : post.createdAt;
 
   return (
     <Link
@@ -135,8 +146,14 @@ export function PostCard({ post }: PostCardProps) {
             )}
             <span>{post.author.name}</span>
           </div>
-          <time dateTime={post.createdAt.toISOString()}>
-            {formatDistanceToNow(post.createdAt, { addSuffix: true })}
+          <time
+            dateTime={
+              typeof createdAt === "string"
+                ? createdAt
+                : createdAt.toISOString()
+            }
+          >
+            {formatDistanceToNow(createdAt, { addSuffix: true })}
           </time>
         </CardFooter>
       </Card>
