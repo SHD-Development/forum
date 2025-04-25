@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 type Props = {
   session: Session | null;
@@ -93,30 +94,30 @@ const Navbar = ({ session }: Props) => {
                   <CircleUser />
                   {t("common.profile")}
                 </DropdownMenuItem>
-                <a href="/dashboard">
+                <Link href="/dashboard">
                   <DropdownMenuItem>
                     <CircleGauge />
                     {t("common.dashboard")}
                   </DropdownMenuItem>
-                </a>
+                </Link>
                 <DropdownMenuSeparator />
-                <a href="/auth/logout">
+                <Link href="/auth/logout">
                   <DropdownMenuItem>
                     <LogOut />
                     {t("common.logout")}
                   </DropdownMenuItem>
-                </a>
+                </Link>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <a href="/auth/login">
+            <Link href="/auth/login">
               <Button
                 variant="outline"
                 className="hidden sm:inline-flex rounded-full"
               >
                 {t("common.login")}
               </Button>
-            </a>
+            </Link>
           )}
 
           <ModeToggle />

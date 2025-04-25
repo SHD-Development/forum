@@ -5,11 +5,11 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params;
-    const postId = parseInt(id);
+    const p = await params;
+    const postId = parseInt(p.id);
 
     if (isNaN(postId)) {
       return NextResponse.json({ error: "Invalid post ID" }, { status: 400 });
@@ -46,16 +46,16 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
-
+    const p = await params;
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const postId = parseInt(params.id);
+    const postId = parseInt(p.id);
 
     if (isNaN(postId)) {
       return NextResponse.json({ error: "Invalid post ID" }, { status: 400 });
@@ -103,16 +103,16 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
-
+    const p = await params;
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const postId = parseInt(params.id);
+    const postId = parseInt(p.id);
 
     if (isNaN(postId)) {
       return NextResponse.json({ error: "Invalid post ID" }, { status: 400 });

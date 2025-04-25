@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 import ThemeSwitch from "@/components/theme-switch";
+import Link from "next/link";
 export function NavUser({ user }: { user: any }) {
   const { isMobile } = useSidebar();
 
@@ -99,12 +100,12 @@ export function NavUser({ user }: { user: any }) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <a href="/auth/logout">
+            <Link href="/auth/logout">
               <DropdownMenuItem>
                 <LogOut />
                 Log out
               </DropdownMenuItem>
-            </a>
+            </Link>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

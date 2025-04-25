@@ -5,6 +5,7 @@ import { PostCard } from "@/components/post-card";
 import { Loader2 } from "lucide-react";
 import { User } from "@prisma/client";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 type Post = {
   id: string;
   title: string;
@@ -143,12 +144,12 @@ export function PostsList({ initialLimit, session }: PostsListProps) {
               No posts available yet.
             </p>
             {session && (
-              <a
+              <Link
                 href="/dashboard/post/create"
                 className="mt-4 inline-block underline"
               >
                 Create your first post
-              </a>
+              </Link>
             )}
           </div>
         )}
