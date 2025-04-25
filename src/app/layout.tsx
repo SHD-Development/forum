@@ -15,6 +15,9 @@ import {
 import { SessionProvider } from "next-auth/react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "react-hot-toast";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
+
 // import { unstable_ViewTransition as ViewTransition } from "react";
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,28 +34,31 @@ export const metadata: Metadata = {
   description: "Love loli!",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const dictionaries = await getMessages();
+  const locale = await getLocale();
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {" "}
-          <SessionProvider>
-            <TooltipProvider>{children}</TooltipProvider>
-            <Toaster position="top-center" />{" "}
-          </SessionProvider>
-        </ThemeProvider>
+        <NextIntlClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <SessionProvider>
+              <TooltipProvider>{children}</TooltipProvider>
+              <Toaster position="top-center" />
+            </SessionProvider>
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

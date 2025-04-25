@@ -1,0 +1,23 @@
+{
+  "appName": "Loli Forum",
+  "common": {
+    "register": "Register",
+    "login": "Login",
+    "logout": "Logout",
+    "account": "Account",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "email": "Email",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "profile": "Profile"
+  },
+  "navbar": {
+    "greetings": "Hi, ",
+    "search": "Search"
+  },
+  "homePage": {
+    "latestPosts": "Latest Posts",
+    "latestPostsDescription": "Discover interesting articles."
+  }
+}

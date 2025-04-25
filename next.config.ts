@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 import appConfig from "@/config";
 const nextConfig: NextConfig = {
   experimental: {
@@ -12,5 +13,6 @@ const nextConfig: NextConfig = {
     domains: appConfig.imageDomains,
   },
 };
+const withNextIntl = createNextIntlPlugin();
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

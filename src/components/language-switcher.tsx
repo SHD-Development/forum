@@ -1,0 +1,62 @@
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { getCookie, setCookie } from "cookies-next";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { US, TW, CN, JP } from "country-flag-icons/react/3x2";
+export const LanguageSwitcher = () => {
+  const [locale, setLocale] = useState<string>("");
+  const router = useRouter();
+  useEffect(() => {
+    const cookieLocale = getCookie("NEXT_LOCALE");
+    if (cookieLocale) {
+      setLocale(cookieLocale as string);
+    } else {
+      const browserLocale = navigator.language.toLowerCase();
+      setLocale(browserLocale);
+      setCookie("NEXT_LOCALE", browserLocale);
+      window.location.reload();
+    }
+  }, [router]);
+  return (
+    <div>
+      <Select
+        value={locale}
+        onValueChange={(value) => {
+          setLocale(value);
+          setCookie("NEXT_LOCALE", value);
+          window.location.reload();
+        }}
+      >
+        <SelectTrigger className="">
+          <SelectValue placeholder="Language" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Languages</SelectLabel>
+            <SelectItem value="en">
+              <US /> English (US)
+            </SelectItem>
+            <SelectItem value="zh-tw">
+              <TW /> 繁體中文 (臺灣)
+            </SelectItem>
+            <SelectItem value="zh-cn">
+              <CN /> 简体中文 (中国)
+            </SelectItem>
+            <SelectItem value="jp">
+              <JP /> 日本語 (日本)
+            </SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
+  );
+};

@@ -1,0 +1,23 @@
+{
+  "appName": "ロリフォーラム",
+  "common": {
+    "register": "登録",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "account": "アカウント",
+    "password": "パスワード",
+    "confirmPassword": "パスワード確認",
+    "email": "メールアドレス",
+    "dashboard": "ダッシュボード",
+    "settings": "設定",
+    "profile": "プロフィール"
+  },
+  "navbar": {
+    "greetings": "こんにちは、",
+    "search": "検索"
+  },
+  "homePage": {
+    "latestPosts": "最新の投稿",
+    "latestPostsDescription": "興味のあるトピックを探しましょう。"
+  }
+}

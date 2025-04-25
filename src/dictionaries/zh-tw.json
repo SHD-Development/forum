@@ -1,0 +1,23 @@
+{
+  "appName": "蘿莉論壇",
+  "common": {
+    "register": "註冊",
+    "login": "登入",
+    "logout": "登出",
+    "account": "帳號",
+    "password": "密碼",
+    "confirmPassword": "確認密碼",
+    "email": "電子郵件",
+    "dashboard": "儀表板",
+    "settings": "設定",
+    "profile": "個人資料"
+  },
+  "navbar": {
+    "greetings": "你好，",
+    "search": "搜尋"
+  },
+  "homePage": {
+    "latestPosts": "最新文章",
+    "latestPostsDescription": "尋找你所感興趣的主題。"
+  }
+}

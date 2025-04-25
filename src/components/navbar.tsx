@@ -21,13 +21,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { useTranslations } from "next-intl";
 
 type Props = {
   session: Session | null;
 };
 const Navbar = ({ session }: Props) => {
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const t = useTranslations();
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -54,17 +56,18 @@ const Navbar = ({ session }: Props) => {
       <div className="h-full flex items-center justify-between mx-auto px-4">
         <div className="flex items-center gap-2 md:gap-6">
           <Cloud className="text-black dark:text-white" size={32} />
-          <p className="font-bold text-black dark:text-white">Loli Forum</p>
+          <p className="font-bold text-black dark:text-white">{t("appName")}</p>
           <div className="relative hidden md:block">
             <Search className="h-5 w-5 absolute inset-y-0 my-auto left-2.5" />
             <Input
               className="pl-10 flex-1 bg-slate-100/70 dark:bg-slate-800 border-none shadow-none w-[280px] rounded-full"
-              placeholder="Search"
+              placeholder={t("navbar.search")}
             />
           </div>
         </div>
 
         <div className="flex items-center gap-2">
+          <LanguageSwitcher />
           <Button
             size="icon"
             className="bg-muted text-foreground hover:bg-accent shadow-none rounded-full md:hidden"
@@ -79,27 +82,28 @@ const Navbar = ({ session }: Props) => {
                   className="hidden sm:inline-flex rounded-full"
                 >
                   <IdCard />
-                  Hi, {session.user?.name}
+                  {t("navbar.greetings")}
+                  {session.user?.name}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuLabel>Account</DropdownMenuLabel>
+                <DropdownMenuLabel>{t("common.account")}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <CircleUser />
-                  Profile
+                  {t("common.profile")}
                 </DropdownMenuItem>
                 <a href="/dashboard">
                   <DropdownMenuItem>
                     <CircleGauge />
-                    Dashboard
+                    {t("common.dashboard")}
                   </DropdownMenuItem>
                 </a>
                 <DropdownMenuSeparator />
                 <a href="/auth/logout">
                   <DropdownMenuItem>
                     <LogOut />
-                    Logout
+                    {t("common.logout")}
                   </DropdownMenuItem>
                 </a>
               </DropdownMenuContent>
@@ -110,7 +114,7 @@ const Navbar = ({ session }: Props) => {
                 variant="outline"
                 className="hidden sm:inline-flex rounded-full"
               >
-                Login
+                {t("common.login")}
               </Button>
             </a>
           )}
