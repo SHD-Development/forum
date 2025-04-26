@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 import appConfig from "@/config";
+
 const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
@@ -10,7 +11,10 @@ const nextConfig: NextConfig = {
     FILE_STORAGE_KEY: process.env.FILE_STORAGE_KEY,
   },
   images: {
-    domains: appConfig.imageDomains,
+    remotePatterns: appConfig.imageDomains.map((hostname) => ({
+      protocol: "https",
+      hostname,
+    })),
   },
   async headers() {
     return [
@@ -33,6 +37,7 @@ const nextConfig: NextConfig = {
     ];
   },
 };
+
 const withNextIntl = createNextIntlPlugin();
 
 export default withNextIntl(nextConfig);
