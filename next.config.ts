@@ -1,10 +1,13 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 import appConfig from "@/config";
-
+import { SizeLimit } from "next";
 const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
+    serverActions: {
+      bodySizeLimit: appConfig.bodySizeLimit as SizeLimit,
+    },
   },
   env: {
     FILE_STORAGE_URL: process.env.FILE_STORAGE_URL,
