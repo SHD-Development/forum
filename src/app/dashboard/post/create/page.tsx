@@ -1,5 +1,5 @@
 "use client";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect, useRef } from "react";
 import { Content, Editor } from "@tiptap/react";
 import { MinimalTiptapEditor } from "@/components/minimal-tiptap";
 import { SidebarTrigger } from "@/components/ui/sidebar";
@@ -22,13 +22,50 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { CircleHelp } from "lucide-react";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+
 export default function CreatePostPage() {
   const [value, setValue] = useState<Content>("");
   const [title, setTitle] = useState("");
   const [cover, setCover] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
+  const [currentInputTarget, setCurrentInputTarget] = useState<
+    "title" | "content"
+  >("title");
+  const editorRef = useRef<Editor | null>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    const handleOpenEmojiPicker = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      setCurrentInputTarget(customEvent.detail.target);
+      if (customEvent.detail.editor) {
+        editorRef.current = customEvent.detail.editor;
+      }
+      setIsEmojiPickerOpen(true);
+    };
+
+    window.addEventListener(
+      "open-emoji-picker",
+      handleOpenEmojiPicker as EventListener
+    );
+
+    return () => {
+      window.removeEventListener(
+        "open-emoji-picker",
+        handleOpenEmojiPicker as EventListener
+      );
+    };
+  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -74,6 +111,23 @@ export default function CreatePostPage() {
     }
   };
 
+  const handleEmojiSelect = (emoji: any) => {
+    if (currentInputTarget === "title") {
+      setTitle((prev) => prev + emoji.native);
+    } else if (currentInputTarget === "content" && editorRef.current) {
+      editorRef.current.commands.insertContent(emoji.native);
+    }
+  };
+
+  const openEmojiPicker = (target: "title" | "content") => {
+    setCurrentInputTarget(target);
+    setIsEmojiPickerOpen(true);
+  };
+
+  const handleEditorReady = (editor: Editor) => {
+    editorRef.current = editor;
+  };
+
   return (
     <>
       <header className="flex h-16 shrink-0 items-center gap-2">
@@ -97,20 +151,33 @@ export default function CreatePostPage() {
       </header>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center justify-center w-1/2 m-auto my-10"
+        className="flex flex-col items-center justify-center w-4/5 lg:w-1/2 m-auto my-10"
       >
-        <label htmlFor="title" className="text-2xl mb-2 text-gray-400">
-          Title
-        </label>
-        <Input
-          id="title"
-          className="mb-10"
-          placeholder="[Question] How to create a post?"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
+        <div className="w-full mb-10">
+          <label htmlFor="title" className="text-2xl mb-2 text-gray-400 block">
+            Title
+          </label>
+          <div className="flex items-center gap-2">
+            <Input
+              id="title"
+              placeholder="[Question] How to create a post?"
+              name="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              className="flex-grow"
+            />
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => openEmojiPicker("title")}
+            >
+              😊
+            </Button>
+          </div>
+        </div>
+
         <label
           htmlFor="cover"
           className="text-2xl mb-2 text-gray-400 flex flex-row items-center"
@@ -131,30 +198,62 @@ export default function CreatePostPage() {
         </label>
         <Input
           id="cover"
-          className="mb-10"
+          className="mb-10 w-full"
           placeholder="https://fileapi.example.com/uploads/Image.jpg"
           name="cover"
           value={cover}
           onChange={(e) => setCover(e.target.value)}
         />
-        <label htmlFor="content" className="text-2xl mb-2 text-gray-400">
-          Content
-        </label>
-        <MinimalTiptapEditor
-          value={value}
-          onChange={setValue}
-          className="w-full"
-          editorContentClassName="p-5"
-          output="json"
-          placeholder="Content..."
-          autofocus={true}
-          editable={true}
-          editorClassName="focus:outline-hidden"
-        />
+
+        <div className="w-full mb-10">
+          <label
+            htmlFor="content"
+            className="text-2xl mb-2 text-gray-400 block"
+          >
+            Content
+          </label>
+          <div className="flex flex-col w-full">
+            <MinimalTiptapEditor
+              value={value}
+              onChange={setValue}
+              className="w-full"
+              editorContentClassName="p-5"
+              output="json"
+              placeholder="Content..."
+              autofocus={true}
+              editable={true}
+              editorClassName="focus:outline-hidden"
+              onEditorReady={handleEditorReady}
+            />
+          </div>
+        </div>
+
+        <Dialog
+          open={isEmojiPickerOpen}
+          onOpenChange={setIsEmojiPickerOpen}
+          modal={false}
+        >
+          <DialogContent className="sm:max-w-md flex flex-col items-center justify-center">
+            <DialogHeader>
+              <DialogTitle>
+                Select Emoji -{" "}
+                {currentInputTarget === "title" ? "Title" : "Content"}
+              </DialogTitle>
+            </DialogHeader>
+            <div className="pt-4 pb-2">
+              <Picker
+                data={data}
+                onEmojiSelect={handleEmojiSelect}
+                theme=""
+                className="w-full"
+              />
+            </div>
+          </DialogContent>
+        </Dialog>
 
         <Button
           variant="secondary"
-          className="mt-10"
+          className="mt-6"
           type="submit"
           disabled={isSubmitting}
         >

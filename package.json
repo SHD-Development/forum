@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.8.0",
+    "@emoji-mart/data": "^1.2.1",
+    "@emoji-mart/react": "^1.1.1",
     "@floating-ui/react": "^0.27.7",
     "@next/env": "15.3.1",
     "@prisma/client": "^6.6.0",
@@ -50,6 +52,7 @@
     "cookies-next": "^5.1.0",
     "country-flag-icons": "^1.5.18",
     "date-fns": "^4.1.0",
+    "emoji-mart": "^5.6.0",
     "lowlight": "^3.3.0",
     "lucide-react": "^0.483.0",
     "next": "15.3.1",
