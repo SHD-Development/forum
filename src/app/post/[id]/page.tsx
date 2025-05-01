@@ -12,6 +12,7 @@ import {
   MessageSquare,
   Share2,
   MoreHorizontal,
+  AlertCircle,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -32,6 +33,28 @@ import {
 } from "@/components/ui/tooltip";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import appConfig from "@/config";
+
+function isValidUrl(url: string | null | undefined): boolean {
+  if (!url) return false;
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function isAllowedDomain(url: string | null | undefined): boolean {
+  if (!url) return false;
+  try {
+    const urlObj = new URL(url);
+    return appConfig.imageDomains.includes(urlObj.hostname);
+  } catch {
+    return false;
+  }
+}
+
 interface Post {
   id: number;
   title: string;
@@ -54,15 +77,20 @@ export default function PostDetailPage() {
   const [post, setPost] = useState<Post | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [coverImageStatus, setCoverImageStatus] = useState<
+    "loading" | "loaded" | "error"
+  >("loading");
+
   const shareLink = () => {
     navigator.clipboard.writeText(`${window.location.origin}/post/${postId}`);
     toast.success("Copied link to clipboard!");
   };
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const response = await fetch(`/api/post/${postId}`);
-
+        console.log("Response:", response);
         if (!response.ok) {
           throw new Error(`Failed to fetch post: ${response.status}`);
         }
@@ -81,6 +109,49 @@ export default function PostDetailPage() {
 
     fetchPost();
   }, [postId]);
+
+  useEffect(() => {
+    if (post?.cover) {
+      const isCoverUrlValid = isValidUrl(post.cover);
+      const isCoverDomainAllowed = isAllowedDomain(post.cover);
+
+      if (isCoverUrlValid && isCoverDomainAllowed) {
+        const imgElement = document.createElement("img");
+        imgElement.src = post.cover;
+
+        if (imgElement.complete) {
+          setCoverImageStatus("loaded");
+        } else {
+          setCoverImageStatus("loading");
+          imgElement.onload = () => setCoverImageStatus("loaded");
+          imgElement.onerror = () => setCoverImageStatus("error");
+        }
+      } else {
+        setCoverImageStatus("error");
+      }
+    }
+  }, [post]);
+
+  const renderCoverErrorMessage = () => {
+    let errorMessage = "Cannot load image";
+
+    if (post?.cover) {
+      if (!isValidUrl(post.cover)) {
+        errorMessage = "Invalid URL";
+      } else if (!isAllowedDomain(post.cover)) {
+        errorMessage = "Unconfigured host";
+      }
+    }
+
+    return (
+      <div className="flex items-center justify-center h-full w-full bg-gray-800">
+        <div className="flex flex-col items-center text-gray-400">
+          <AlertCircle className="h-8 w-8 mb-2" />
+          <span>{errorMessage}</span>
+        </div>
+      </div>
+    );
+  };
 
   if (isLoading) {
     return (
@@ -144,6 +215,13 @@ export default function PostDetailPage() {
     new Date(post.updatedAt),
     "yyyy-MM-dd HH:mm"
   );
+
+  const isCoverUrlValid = post.cover === null ? false : isValidUrl(post.cover);
+  const isCoverDomainAllowed =
+    post.cover === null ? false : isAllowedDomain(post.cover);
+  const shouldShowCoverImage =
+    post.cover && isCoverUrlValid && isCoverDomainAllowed;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
       <div className="container max-w-4xl mx-auto py-6 px-4">
@@ -154,15 +232,34 @@ export default function PostDetailPage() {
           </Button>
         </Link>
         <Card className="bg-gray-900 border-gray-800 overflow-hidden shadow-xl">
-          {post.cover && (
+          {shouldShowCoverImage && (
             <div className="w-full h-80 relative">
-              <Image
-                src={post.cover}
-                alt={post.title}
-                fill
-                className="object-cover"
-                priority
-              />
+              {coverImageStatus === "error" ? (
+                renderCoverErrorMessage()
+              ) : (
+                <>
+                  <Image
+                    src={post.cover || ""}
+                    alt={post.title}
+                    fill
+                    className={`object-cover ${
+                      coverImageStatus === "loaded"
+                        ? "opacity-100"
+                        : "opacity-0"
+                    } transition-opacity duration-200`}
+                    priority
+                    onError={() => setCoverImageStatus("error")}
+                  />
+                  {coverImageStatus === "loading" && (
+                    <Skeleton className="absolute inset-0 h-full w-full" />
+                  )}
+                </>
+              )}
+            </div>
+          )}
+          {post.cover && (!isCoverUrlValid || !isCoverDomainAllowed) && (
+            <div className="w-full h-80 relative">
+              {renderCoverErrorMessage()}
             </div>
           )}
 

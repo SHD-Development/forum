@@ -1,12 +1,14 @@
 import React, { useMemo } from "react";
-import { generateHTML, JSONContent } from "@tiptap/core";
+import { generateHTML } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
-import { JsonValue } from "@prisma/client/runtime/library";
+import Underline from "@tiptap/extension-underline";
+import TextStyle from "@tiptap/extension-text-style";
+import Color from "@tiptap/extension-color";
 
 interface TiptapHTMLRendererProps {
-  content: JSONContent;
+  content: any;
   className?: string;
 }
 
@@ -16,9 +18,20 @@ export function TiptapHTMLRenderer({
 }: TiptapHTMLRendererProps) {
   const html = useMemo(() => {
     try {
-      return generateHTML(content, [StarterKit, Link, Image]);
+      const contentToRender =
+        typeof content === "string" ? JSON.parse(content) : content;
+
+      return generateHTML(contentToRender, [
+        StarterKit,
+        Link,
+        Image,
+        Underline,
+        TextStyle,
+        Color,
+      ]);
     } catch (e) {
-      return `<p>${content}</p>`;
+      console.error("Error rendering Tiptap content:", e);
+      return "<p>Could not render content</p>";
     }
   }, [content]);
 

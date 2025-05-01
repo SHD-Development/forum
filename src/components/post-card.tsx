@@ -41,6 +41,16 @@ function isValidUrl(url: string | null | undefined): boolean {
   }
 }
 
+function isAllowedDomain(url: string | null | undefined): boolean {
+  if (!url) return false;
+  try {
+    const urlObj = new URL(url);
+    return appConfig.imageDomains.includes(urlObj.hostname);
+  } catch {
+    return false;
+  }
+}
+
 export function PostCard({ post }: PostCardProps) {
   const [coverImageStatus, setCoverImageStatus] = useState<
     "loading" | "loaded" | "error"
@@ -49,17 +59,26 @@ export function PostCard({ post }: PostCardProps) {
     "loading" | "loaded" | "error"
   >("loading");
 
-  const isCoverUrlValid = isValidUrl(post.cover);
+  const isCoverUrlValid = post.cover === null ? true : isValidUrl(post.cover);
+  const isCoverDomainAllowed =
+    post.cover === null ? true : isAllowedDomain(post.cover);
+  const coverErrorType = !isCoverUrlValid
+    ? "invalid_url"
+    : !isCoverDomainAllowed
+    ? "unconfigured_host"
+    : "load_error";
+
   const isAuthorImageUrlValid = isValidUrl(post.author.image);
 
   useEffect(() => {
-    if (isCoverUrlValid) setCoverImageStatus("loading");
+    if (isCoverUrlValid && isCoverDomainAllowed) setCoverImageStatus("loading");
     if (isAuthorImageUrlValid) setAuthorImageStatus("loading");
   }, [
     post.id,
     post.cover,
     post.author.image,
     isCoverUrlValid,
+    isCoverDomainAllowed,
     isAuthorImageUrlValid,
   ]);
 
@@ -68,6 +87,23 @@ export function PostCard({ post }: PostCardProps) {
       ? new Date(post.createdAt)
       : post.createdAt;
 
+  const renderCoverErrorMessage = () => {
+    const errorMessages = {
+      invalid_url: "Invalid URL",
+      unconfigured_host: "Unconfigured host",
+      load_error: "Cannot load image",
+    };
+
+    return (
+      <div className="flex items-center justify-center h-full w-full bg-muted">
+        <div className="flex flex-col items-center text-muted-foreground">
+          <AlertCircle className="h-8 w-8 mb-2" />
+          <span>{errorMessages[coverErrorType]}</span>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Link
       href={`/post/${post.id}`}
@@ -75,24 +111,21 @@ export function PostCard({ post }: PostCardProps) {
     >
       <Card className="overflow-hidden h-full flex flex-col">
         <div className="relative aspect-video w-full bg-muted">
-          {!isCoverUrlValid ? (
+          {post.cover === null ? (
             <Image
               src={appConfig.coverRandomImageApiUrl}
               alt="Random Image"
               fill
               className="object-cover"
             />
+          ) : !isCoverUrlValid || !isCoverDomainAllowed ? (
+            renderCoverErrorMessage()
           ) : coverImageStatus === "error" ? (
-            <div className="flex items-center justify-center h-full w-full bg-muted">
-              <div className="flex flex-col items-center text-muted-foreground">
-                <AlertCircle className="h-8 w-8 mb-2" />
-                <span>Cannot load image</span>
-              </div>
-            </div>
+            renderCoverErrorMessage()
           ) : (
             <>
               <Image
-                src={post.cover || ""}
+                src={post.cover}
                 alt={post.title}
                 fill
                 className={`object-cover ${

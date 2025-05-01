@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 import appConfig from "@/config";
 import { SizeLimit } from "next";
+
 const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
@@ -14,10 +15,10 @@ const nextConfig: NextConfig = {
     FILE_STORAGE_KEY: process.env.FILE_STORAGE_KEY,
   },
   images: {
-    remotePatterns: appConfig.imageDomains.map((hostname) => ({
-      protocol: "https",
-      hostname,
-    })),
+    remotePatterns: appConfig.imageDomains.flatMap((hostname) => [
+      { protocol: "https", hostname, pathname: "/**" },
+      { protocol: "http", hostname, pathname: "/**" },
+    ]),
   },
   async headers() {
     return [
