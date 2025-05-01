@@ -153,7 +153,7 @@ export default function CreatePostPage() {
         onSubmit={handleSubmit}
         className="flex flex-col items-center justify-center w-4/5 lg:w-1/2 m-auto my-10"
       >
-        <div className="w-full mb-10">
+        <div className="w-full mb-10 text-center">
           <label htmlFor="title" className="text-2xl mb-2 text-gray-400 block">
             Title
           </label>
@@ -205,7 +205,7 @@ export default function CreatePostPage() {
           onChange={(e) => setCover(e.target.value)}
         />
 
-        <div className="w-full mb-10">
+        <div className="w-full mb-10 text-center">
           <label
             htmlFor="content"
             className="text-2xl mb-2 text-gray-400 block"
