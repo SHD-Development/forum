@@ -14,7 +14,7 @@ import {
   Cloud,
   CircleGauge,
 } from "lucide-react";
-
+import Link from "next/link";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
@@ -167,7 +167,7 @@ export function AppSidebar({ session, ...props }: AppSidebarProps) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="/" className="group/home">
+              <Link href="/" className="group/home">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <Cloud />
                 </div>
@@ -182,7 +182,7 @@ export function AppSidebar({ session, ...props }: AppSidebarProps) {
                     </span>
                   </div>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
