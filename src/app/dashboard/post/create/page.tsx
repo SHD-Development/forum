@@ -39,7 +39,7 @@ import {
 import { CircleHelp } from "lucide-react";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-
+import { useTranslations } from "next-intl";
 export default function CreatePostPage() {
   const [value, setValue] = useState<Content>("");
   const [title, setTitle] = useState("");
@@ -51,7 +51,7 @@ export default function CreatePostPage() {
   >("title");
   const editorRef = useRef<Editor | null>(null);
   const router = useRouter();
-
+  const t = useTranslations("createPostForm");
   useEffect(() => {
     const handleOpenEmojiPicker = (e: Event) => {
       const customEvent = e as CustomEvent;
@@ -79,7 +79,7 @@ export default function CreatePostPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const toastId = toast.loading("Creating post...");
+    const toastId = toast.loading(t("creating"));
 
     try {
       const formData = new FormData();
@@ -93,7 +93,7 @@ export default function CreatePostPage() {
         },
       });
 
-      toast.success("Post created successfully!", { id: toastId });
+      toast.success(t("success"), { id: toastId });
 
       router.push("/dashboard/post/create");
     } catch (error) {
@@ -103,16 +103,16 @@ export default function CreatePostPage() {
         const errorMessage = error.response?.data?.error || error.message;
 
         if (errorMessage.includes("signed in")) {
-          toast.error("You must be signed in to create a post", {
+          toast.error(t("mustLogin"), {
             id: toastId,
           });
         } else {
-          toast.error(`Failed to create post: ${errorMessage}`, {
+          toast.error(`${t("failed")} ${errorMessage}`, {
             id: toastId,
           });
         }
       } else {
-        toast.error("An unexpected error occurred", { id: toastId });
+        toast.error(t("error"), { id: toastId });
       }
     } finally {
       setIsSubmitting(false);
@@ -146,12 +146,12 @@ export default function CreatePostPage() {
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink href="/dashboard/post/overview">
-                  Post
+                  {t("breadcrumb1")}
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbPage>Create Posts</BreadcrumbPage>
+                <BreadcrumbPage>{t("breadcrumb2")}</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -162,10 +162,10 @@ export default function CreatePostPage() {
         <Card className="w-full max-w-3xl">
           <CardHeader>
             <CardTitle className="text-2xl text-center">
-              Create New Post
+              {t("cardTitle")}
             </CardTitle>
             <CardDescription className="text-center">
-              Fill in the details below to create your post
+              {t("cardDescription")}
             </CardDescription>
           </CardHeader>
 
@@ -173,12 +173,12 @@ export default function CreatePostPage() {
             <CardContent className="space-y-8">
               <div className="space-y-2">
                 <label htmlFor="title" className="text-lg font-medium">
-                  Title
+                  {t("title")}
                 </label>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 mt-3">
                   <Input
                     id="title"
-                    placeholder="[Question] How to create a post?"
+                    placeholder={t("titlePlaceholder")}
                     name="title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -199,26 +199,25 @@ export default function CreatePostPage() {
               <div className="space-y-2">
                 <div className="flex items-center">
                   <label htmlFor="cover" className="text-lg font-medium">
-                    Cover Image URL
+                    {t("cover")}
                   </label>
-                  <span className="text-sm ml-2">(Optional)</span>
+                  <span className="text-sm ml-2">({t("optional")})</span>
                   <Tooltip>
                     <TooltipTrigger className="ml-2 cursor-pointer dark:text-white hover:text-gray-600">
                       <CircleHelp size={18} />
                     </TooltipTrigger>
                     <TooltipContent className="w-48 text-center bg-zinc-900">
                       <p className="text-sm dark:text-white">
-                        You can use the image upload button in the text editor
-                        down below to upload your image and copy the URL to
-                        here, or you can just use your own direct image URL.
+                        {t("coverTooltip")}
                       </p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
                 <Input
                   id="cover"
-                  placeholder="https://fileapi.example.com/uploads/Image.jpg"
+                  placeholder={t("coverPlaceholder")}
                   name="cover"
+                  className="mt-3"
                   value={cover}
                   onChange={(e) => setCover(e.target.value)}
                 />
@@ -226,15 +225,15 @@ export default function CreatePostPage() {
 
               <div className="space-y-2">
                 <label htmlFor="content" className="text-lg font-medium">
-                  Content
+                  {t("content")}
                 </label>
                 <MinimalTiptapEditor
                   value={value}
                   onChange={setValue}
-                  className="w-full min-h-[300px] border rounded-md"
+                  className="w-full min-h-[300px] border rounded-md mt-3"
                   editorContentClassName="p-5"
                   output="json"
-                  placeholder="Content..."
+                  placeholder={t("contentPlaceholder")}
                   autofocus={true}
                   editable={true}
                   editorClassName="focus:outline-hidden"
@@ -250,7 +249,7 @@ export default function CreatePostPage() {
                 disabled={isSubmitting}
                 className="w-full md:w-auto mt-6"
               >
-                {isSubmitting ? "Submitting..." : "Create Post"}
+                {isSubmitting ? t("creating") : t("create")}
               </Button>
             </CardFooter>
           </form>
@@ -265,8 +264,8 @@ export default function CreatePostPage() {
         <DialogContent className="sm:max-w-md flex flex-col items-center justify-center">
           <DialogHeader>
             <DialogTitle>
-              Select Emoji -{" "}
-              {currentInputTarget === "title" ? "Title" : "Content"}
+              {t("selectEmoji")} -{" "}
+              {currentInputTarget === "title" ? t("title") : t("content")}
             </DialogTitle>
           </DialogHeader>
           <div className="pt-4 pb-2">

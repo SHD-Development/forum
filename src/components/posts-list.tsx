@@ -5,6 +5,7 @@ import { PostCard } from "@/components/post-card";
 import { Loader2 } from "lucide-react";
 import { User } from "@prisma/client";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 type Post = {
   id: string;
@@ -37,7 +38,7 @@ export function PostsList({ initialLimit, session }: PostsListProps) {
   const [hasError, setHasError] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
-
+  const t = useTranslations("postsList");
   const fetchPosts = useCallback(
     async (page = 1, limit = initialLimit) => {
       try {
@@ -117,9 +118,7 @@ export function PostsList({ initialLimit, session }: PostsListProps) {
   if (hasError) {
     return (
       <div className="col-span-full text-center py-12 bg-white/90 dark:bg-zinc-900/90 rounded-lg">
-        <p className="text-lg text-red-500">
-          Failed to load posts. Please try again later.
-        </p>
+        <p className="text-lg text-red-500">{t("error")}</p>
         <Button
           onClick={() => {
             setHasError(false);
@@ -127,7 +126,7 @@ export function PostsList({ initialLimit, session }: PostsListProps) {
           }}
           className="mt-4 px-4 py-2"
         >
-          Try Again
+          {t("tryAgain")}
         </Button>
       </div>
     );
@@ -140,15 +139,13 @@ export function PostsList({ initialLimit, session }: PostsListProps) {
           posts.map((post) => <PostCard key={post.id} post={post} />)
         ) : (
           <div className="col-span-full text-center py-12 bg-zinc-900/90 rounded-lg">
-            <p className="text-lg text-muted-foreground">
-              No posts available yet.
-            </p>
+            <p className="text-lg text-muted-foreground">{t("noPosts")}</p>
             {session && (
               <Link
                 href="/dashboard/post/create"
                 className="mt-4 inline-block underline"
               >
-                Create your first post
+                {t("createYourPost")}
               </Link>
             )}
           </div>
@@ -160,7 +157,7 @@ export function PostsList({ initialLimit, session }: PostsListProps) {
           {loadingMore && (
             <div className="flex items-center gap-2 rounded-lg bg-white/90 dark:bg-zinc-900/90 p-4">
               <Loader2 className="h-5 w-5 animate-spin text-primary" />
-              <p>Loading more posts...</p>
+              <p>{t("loadingMorePosts")}</p>
             </div>
           )}
         </div>

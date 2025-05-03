@@ -28,10 +28,12 @@ import {
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 import ThemeSwitch from "@/components/theme-switch";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 export function NavUser({ user }: { user: any }) {
   const { isMobile } = useSidebar();
-
+  const t = useTranslations();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -79,13 +81,13 @@ export function NavUser({ user }: { user: any }) {
               <DropdownMenuItem>
                 <ThemeSwitch />
               </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
               <DropdownMenuItem>
                 <Sparkles />
                 Upgrade to Pro
               </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
               <DropdownMenuItem>
                 <BadgeCheck />
                 Account
@@ -103,7 +105,7 @@ export function NavUser({ user }: { user: any }) {
             <Link href="/auth/logout">
               <DropdownMenuItem>
                 <LogOut />
-                Log out
+                {t("common.logout")}
               </DropdownMenuItem>
             </Link>
           </DropdownMenuContent>

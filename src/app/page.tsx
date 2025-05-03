@@ -22,7 +22,7 @@ export default async function Home() {
           </div>
 
           <Suspense
-            fallback={<div className="text-center py-12">Loading posts...</div>}
+            fallback={<div className="text-center py-12">{t("loading")}</div>}
           >
             <PostsList initialLimit={16} session={session} />
           </Suspense>

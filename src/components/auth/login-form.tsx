@@ -5,8 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signIn } from "@/auth";
 import { FaGoogle, FaDiscord } from "react-icons/fa6";
-
-export function LoginForm({
+import { getTranslations } from "next-intl/server";
+export async function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -14,10 +14,11 @@ export function LoginForm({
     "use server";
     await signIn("google", { redirectTo: "/dashboard" });
   }
-  async function discordLogin() {
-    "use server";
-    await signIn("discord", { redirectTo: "/dashboard" });
-  }
+  // async function discordLogin() {
+  //   "use server";
+  //   await signIn("discord", { redirectTo: "/dashboard" });
+  // }
+  const t = await getTranslations("loginForm");
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
@@ -25,14 +26,14 @@ export function LoginForm({
           <div className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
-                <h1 className="text-2xl font-bold">Welcome back</h1>
+                <h1 className="text-2xl font-bold">{t("welcomeBack")}</h1>
                 <p className="text-muted-foreground text-balance">
-                  Login to your Loli Forum account
+                  {t("loginToContinue")}
                 </p>
               </div>
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                 <span className="bg-card text-muted-foreground relative z-10 px-2">
-                  Continue with
+                  {t("continueWith")}
                 </span>
               </div>
 
@@ -50,7 +51,7 @@ export function LoginForm({
                   variant="outline"
                   type="button"
                   className="w-full"
-                  onClick={discordLogin}
+                  // onClick={discordLogin}
                 >
                   <FaDiscord />
                   <span>Discord</span>
@@ -68,8 +69,9 @@ export function LoginForm({
         </CardContent>
       </Card>
       <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        {t("byClickingStart")} <a href="#">{t("termsOfService")}</a>{" "}
+        {t("byClickingAnd")} <a href="#">{t("privacyPolicy")}</a>{" "}
+        {t("byClickingEnd")}
       </div>
     </div>
   );

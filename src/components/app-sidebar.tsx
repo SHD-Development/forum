@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
-import { NavProjects } from "@/components/nav-projects";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
 import {
@@ -44,11 +43,6 @@ export function AppSidebar({ session, ...props }: AppSidebarProps) {
     return pathname.startsWith(url);
   };
   const data = {
-    user: {
-      name: "Shadcn",
-      email: "m@example.com",
-      avatar: "/avatars/shadcn.jpg",
-    },
     navMain: [
       {
         title: "Posts Management",
@@ -205,7 +199,6 @@ export function AppSidebar({ session, ...props }: AppSidebarProps) {
           </Link>
         </SidebarGroup>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>

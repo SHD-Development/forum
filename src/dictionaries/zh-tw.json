@@ -10,7 +10,8 @@
     "email": "電子郵件",
     "dashboard": "儀表板",
     "settings": "設定",
-    "profile": "個人資料"
+    "profile": "個人資料",
+    "languages": "語言"
   },
   "navbar": {
     "greetings": "你好，",
@@ -18,6 +19,56 @@
   },
   "homePage": {
     "latestPosts": "最新文章",
-    "latestPostsDescription": "尋找你所感興趣的主題。"
+    "latestPostsDescription": "尋找你所感興趣的主題。",
+    "loading": "載入中..."
+  },
+  "postsList": {
+    "loadingMorePosts": "正在載入更多文章...",
+    "noPosts": "目前沒有任何文章可供顯示。",
+    "createYourPost": "創建你的第一個文章",
+    "tryAgain": "重試",
+    "error": "發生錯誤，請稍後再試。"
+  },
+  "postCard": {
+    "invalidURL": "無效的圖片網址",
+    "unconfiguredHost": "不受信任的圖片來源",
+    "loadError": "載入時發生錯誤"
+  },
+  "themeSwitch": {
+    "light": "淺色主題",
+    "dark": "深色主題",
+    "system": "系統預設",
+    "toggle": "切換主題"
+  },
+  "loginForm": {
+    "welcomeBack": "歡迎回來！",
+    "loginToContinue": "請登入你的蘿莉論壇帳號",
+    "continueWith": "使用以下方式繼續",
+    "termsOfService": "使用條款",
+    "privacyPolicy": "隱私政策",
+    "byClickingStart": "當你登入時，即代表你同意我們的",
+    "byClickingAnd": "及",
+    "byClickingEnd": "。"
+  },
+  "createPostForm": {
+    "cardTitle": "發佈文章",
+    "cardDescription": "分享你的想法或經驗，讓其他人也能參與討論！",
+    "title": "文章標題",
+    "titlePlaceholder": "[問題] 該怎麼做才能...",
+    "cover": "文章封面",
+    "optional": "選填",
+    "coverPlaceholder": "https://fileapi.example.com/uploads/Image.jpg",
+    "coverTooltip": "你可以使用下方的圖片上傳按鈕上傳圖片後複製網址到這裡，或是使用其他圖片網址。",
+    "content": "文章內容",
+    "contentPlaceholder": "在這裡輸入你的文章內容",
+    "selectEmoji": "選擇表情符號",
+    "breadcrumb1": "文章",
+    "breadcrumb2": "發布文章",
+    "mustLogin": "你必須登入才能發布文章。",
+    "failed": "文章發布失敗：",
+    "error": "發生錯誤，請稍後再試。",
+    "success": "文章發布成功！",
+    "create": "發佈",
+    "creating": "正在發布文章..."
   }
 }

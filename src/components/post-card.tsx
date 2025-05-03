@@ -16,6 +16,7 @@ import { formatDistanceToNow } from "date-fns";
 import { AlertCircle } from "lucide-react";
 import { JSONContent } from "@tiptap/react";
 import { TiptapTextGenerator } from "./tiptap-text-generator";
+import { useTranslations } from "next-intl";
 import appConfig from "@/config";
 type Post = {
   id: string;
@@ -68,7 +69,7 @@ export function PostCard({ post }: PostCardProps) {
     : "load_error";
 
   const isAuthorImageUrlValid = isValidUrl(post.author.image);
-
+  const t = useTranslations("postCard");
   useEffect(() => {
     if (isCoverUrlValid && isCoverDomainAllowed) setCoverImageStatus("loading");
     if (isAuthorImageUrlValid) setAuthorImageStatus("loading");
@@ -88,9 +89,9 @@ export function PostCard({ post }: PostCardProps) {
 
   const renderCoverErrorMessage = () => {
     const errorMessages = {
-      invalid_url: "Invalid URL",
-      unconfigured_host: "Unconfigured host",
-      load_error: "Cannot load image",
+      invalid_url: t("invalidURL"),
+      unconfigured_host: t("unconfiguredHost"),
+      load_error: t("loadError"),
     };
 
     return (

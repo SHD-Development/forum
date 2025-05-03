@@ -10,14 +10,65 @@
     "email": "Email",
     "dashboard": "Dashboard",
     "settings": "Settings",
-    "profile": "Profile"
+    "profile": "Profile",
+    "languages": "Languages"
   },
   "navbar": {
-    "greetings": "Hi, ",
+    "greetings": "Hello, ",
     "search": "Search"
   },
   "homePage": {
     "latestPosts": "Latest Posts",
-    "latestPostsDescription": "Discover interesting articles."
+    "latestPostsDescription": "Explore topics you're interested in.",
+    "loading": "Loading..."
+  },
+  "postsList": {
+    "loadingMorePosts": "Loading more posts...",
+    "noPosts": "There are currently no posts to display.",
+    "createYourPost": "Create your first post",
+    "tryAgain": "Try Again",
+    "error": "An error occurred. Please try again later."
+  },
+  "postCard": {
+    "invalidURL": "Invalid image URL",
+    "unconfiguredHost": "Untrusted image source",
+    "loadError": "Error occurred while loading"
+  },
+  "themeSwitch": {
+    "light": "Light Theme",
+    "dark": "Dark Theme",
+    "system": "System Default",
+    "toggle": "Toggle Theme"
+  },
+  "loginForm": {
+    "welcomeBack": "Welcome back!",
+    "loginToContinue": "Please log in to your Loli Forum account",
+    "continueWith": "Continue with",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "byClickingStart": "By logging in, you agree to our ",
+    "byClickingAnd": "and",
+    "byClickingEnd": "."
+  },
+  "createPostForm": {
+    "cardTitle": "Create Post",
+    "cardDescription": "Share your thoughts or experiences and join the discussion!",
+    "title": "Post Title",
+    "titlePlaceholder": "[Question] What should I do to...",
+    "cover": "Cover Image",
+    "optional": "Optional",
+    "coverPlaceholder": "https://fileapi.example.com/uploads/Image.jpg",
+    "coverTooltip": "You can upload an image below and paste its link here, or use another image URL.",
+    "content": "Post Content",
+    "contentPlaceholder": "Enter your post content here",
+    "selectEmoji": "Select Emoji",
+    "breadcrumb1": "Posts",
+    "breadcrumb2": "Create Post",
+    "mustLogin": "You must be logged in to create a post.",
+    "failed": "Failed to publish post: ",
+    "error": "An error occurred. Please try again later.",
+    "success": "Post published successfully!",
+    "create": "Publish",
+    "creating": "Publishing post..."
   }
 }

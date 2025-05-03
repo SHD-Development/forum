@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTranslations } from "next-intl";
 import { US, TW, CN, JP } from "country-flag-icons/react/3x2";
 export const LanguageSwitcher = () => {
   const [locale, setLocale] = useState<string>("");
@@ -26,6 +27,7 @@ export const LanguageSwitcher = () => {
       window.location.reload();
     }
   }, [router]);
+  const t = useTranslations();
   return (
     <div>
       <Select
@@ -41,7 +43,7 @@ export const LanguageSwitcher = () => {
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Languages</SelectLabel>
+            <SelectLabel>{t("common.languages")}</SelectLabel>
             <SelectItem value="en">
               <US /> English (US)
             </SelectItem>
