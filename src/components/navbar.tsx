@@ -11,6 +11,7 @@ import {
   LogOut,
   IdCard,
   CircleGauge,
+  Menu,
 } from "lucide-react";
 import { Session } from "next-auth";
 import {
@@ -54,7 +55,7 @@ const Navbar = ({ session }: Props) => {
           : "top-6 inset-x-4 rounded-full max-w-screen-2xl border-2 dark:border-zinc-600 ease-out"
       } h-16 mx-auto transition-all duration-225 z-50 backdrop-blur-lg bg-white/75 dark:bg-zinc-950/75`}
     >
-      <div className="h-full flex items-center justify-between mx-auto px-4">
+      <div className="h-full flex items-center justify-between mx-auto px-8">
         <div className="flex items-center gap-2 md:gap-6">
           <Cloud className="text-black dark:text-white" size={32} />
           <p className="font-bold text-black dark:text-white">{t("appName")}</p>
@@ -68,7 +69,9 @@ const Navbar = ({ session }: Props) => {
         </div>
 
         <div className="flex items-center gap-2">
-          <LanguageSwitcher />
+          <div className="hidden lg:flex">
+            <LanguageSwitcher />
+          </div>
           <Button
             size="icon"
             className="bg-muted text-foreground hover:bg-accent shadow-none rounded-full md:hidden"
@@ -121,6 +124,12 @@ const Navbar = ({ session }: Props) => {
           )}
 
           <ModeToggle />
+          <Button
+            variant="secondary"
+            className="md:hidden border-white/50 border-2"
+          >
+            <Menu />
+          </Button>
         </div>
       </div>
     </nav>

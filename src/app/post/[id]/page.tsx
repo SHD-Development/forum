@@ -339,8 +339,8 @@ export default function PostDetailPage() {
             </div>
           </div>
 
-          <div className="p-6 border-t border-gray-800 overflow-auto">
-            <div className="flex items-center justify-between">
+          <div className="px-6 border-t border-gray-800 overflow-auto">
+            <div className="flex items-center justify-between mt-5">
               <div className="flex space-x-4 items-center">
                 <Button variant="ghost" className="flex items-center space-x-2">
                   <Heart className="h-5 w-5" />

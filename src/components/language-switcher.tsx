@@ -36,7 +36,7 @@ export const LanguageSwitcher = () => {
           window.location.reload();
         }}
       >
-        <SelectTrigger className="">
+        <SelectTrigger className="bg-white">
           <SelectValue placeholder="Language" />
         </SelectTrigger>
         <SelectContent>

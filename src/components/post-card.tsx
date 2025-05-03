@@ -17,7 +17,6 @@ import { AlertCircle } from "lucide-react";
 import { JSONContent } from "@tiptap/react";
 import { TiptapTextGenerator } from "./tiptap-text-generator";
 import appConfig from "@/config";
-
 type Post = {
   id: string;
   title: string;
@@ -107,9 +106,9 @@ export function PostCard({ post }: PostCardProps) {
   return (
     <Link
       href={`/post/${post.id}`}
-      className="block hover:opacity-90 transition-opacity"
+      className="block hover:opacity-90 hover:scale-105 transition-all duration-200"
     >
-      <Card className="overflow-hidden h-full flex flex-col">
+      <Card className="overflow-hidden h-full flex flex-col shadow-lg shadow-black/50 hover:ring-5 ring-sky-400/75 dark:ring-white/30 transition-all duration-300 hover:delay-1000">
         <div className="relative aspect-video w-full bg-muted">
           {post.cover === null ? (
             <Image
