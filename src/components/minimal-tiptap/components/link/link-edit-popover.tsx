@@ -1,25 +1,25 @@
-import * as React from "react"
-import type { Editor } from "@tiptap/react"
-import type { VariantProps } from "class-variance-authority"
-import type { toggleVariants } from "@/components/ui/toggle"
+import * as React from "react";
+import type { Editor } from "@tiptap/react";
+import type { VariantProps } from "class-variance-authority";
+import type { toggleVariants } from "@/components/ui/toggle";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { Link2Icon } from "@radix-ui/react-icons"
-import { ToolbarButton } from "../toolbar-button"
-import { LinkEditBlock } from "./link-edit-block"
+} from "@/components/ui/popover";
+import { Link2Icon } from "@radix-ui/react-icons";
+import { ToolbarButton } from "../toolbar-button";
+import { LinkEditBlock } from "./link-edit-block";
 
 interface LinkEditPopoverProps extends VariantProps<typeof toggleVariants> {
-  editor: Editor
+  editor: Editor;
 }
 
 const LinkEditPopover = ({ editor, size, variant }: LinkEditPopoverProps) => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
 
-  const { from, to } = editor.state.selection
-  const text = editor.state.doc.textBetween(from, to, " ")
+  const { from, to } = editor.state.selection;
+  const text = editor.state.doc.textBetween(from, to, " ");
 
   const onSetLink = React.useCallback(
     (url: string, text?: string, openInNewTab?: boolean) => {
@@ -41,12 +41,12 @@ const LinkEditPopover = ({ editor, size, variant }: LinkEditPopoverProps) => {
           ],
         })
         .setLink({ href: url })
-        .run()
+        .run();
 
-      editor.commands.enter()
+      editor.commands.enter();
     },
     [editor]
-  )
+  );
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -66,7 +66,7 @@ const LinkEditPopover = ({ editor, size, variant }: LinkEditPopoverProps) => {
         <LinkEditBlock onSave={onSetLink} defaultText={text} />
       </PopoverContent>
     </Popover>
-  )
-}
+  );
+};
 
-export { LinkEditPopover }
+export { LinkEditPopover };

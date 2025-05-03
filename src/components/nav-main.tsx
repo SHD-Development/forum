@@ -66,9 +66,9 @@ export function NavMain({
                             asChild
                             isActive={subItem.isActive}
                           >
-                            <Link href={subItem.url}>
+                            <a href={subItem.url}>
                               <span>{subItem.title}</span>
-                            </Link>
+                            </a>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}

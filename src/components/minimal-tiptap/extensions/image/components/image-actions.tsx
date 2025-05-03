@@ -1,37 +1,37 @@
-import * as React from "react"
+import * as React from "react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   ClipboardCopyIcon,
   DotsHorizontalIcon,
   DownloadIcon,
   Link2Icon,
   SizeIcon,
-} from "@radix-ui/react-icons"
+} from "@radix-ui/react-icons";
 
 interface ImageActionsProps {
-  shouldMerge?: boolean
-  isLink?: boolean
-  onView?: () => void
-  onDownload?: () => void
-  onCopy?: () => void
-  onCopyLink?: () => void
+  shouldMerge?: boolean;
+  isLink?: boolean;
+  onView?: () => void;
+  onDownload?: () => void;
+  onCopy?: () => void;
+  onCopyLink?: () => void;
 }
 
 interface ActionButtonProps extends React.ComponentProps<"button"> {
-  icon: React.ReactNode
-  tooltip: string
+  icon: React.ReactNode;
+  tooltip: string;
 }
 
 export const ActionWrapper = React.memo(
@@ -47,9 +47,9 @@ export const ActionWrapper = React.memo(
       {children}
     </div>
   )
-)
+);
 
-ActionWrapper.displayName = "ActionWrapper"
+ActionWrapper.displayName = "ActionWrapper";
 
 export const ActionButton = React.memo(
   ({ icon, tooltip, className, ...props }: ActionButtonProps) => (
@@ -70,17 +70,17 @@ export const ActionButton = React.memo(
       <TooltipContent side="bottom">{tooltip}</TooltipContent>
     </Tooltip>
   )
-)
+);
 
-ActionButton.displayName = "ActionButton"
+ActionButton.displayName = "ActionButton";
 
-type ActionKey = "onView" | "onDownload" | "onCopy" | "onCopyLink"
+type ActionKey = "onView" | "onDownload" | "onCopy" | "onCopyLink";
 
 const ActionItems: Array<{
-  key: ActionKey
-  icon: React.ReactNode
-  tooltip: string
-  isLink?: boolean
+  key: ActionKey;
+  icon: React.ReactNode;
+  tooltip: string;
+  isLink?: boolean;
 }> = [
   {
     key: "onView",
@@ -103,25 +103,25 @@ const ActionItems: Array<{
     tooltip: "Copy image link",
     isLink: true,
   },
-]
+];
 
 export const ImageActions: React.FC<ImageActionsProps> = React.memo(
   ({ shouldMerge = false, isLink = false, ...actions }) => {
-    const [isOpen, setIsOpen] = React.useState(false)
+    const [isOpen, setIsOpen] = React.useState(false);
 
     const handleAction = React.useCallback(
       (e: React.MouseEvent, action: (() => void) | undefined) => {
-        e.preventDefault()
-        e.stopPropagation()
-        action?.()
+        e.preventDefault();
+        e.stopPropagation();
+        action?.();
       },
       []
-    )
+    );
 
     const filteredActions = React.useMemo(
       () => ActionItems.filter((item) => isLink || !item.isLink),
       [isLink]
-    )
+    );
 
     return (
       <ActionWrapper className={cn({ "opacity-100": isOpen })}>
@@ -159,8 +159,8 @@ export const ImageActions: React.FC<ImageActionsProps> = React.memo(
           ))
         )}
       </ActionWrapper>
-    )
+    );
   }
-)
+);
 
-ImageActions.displayName = "ImageActions"
+ImageActions.displayName = "ImageActions";

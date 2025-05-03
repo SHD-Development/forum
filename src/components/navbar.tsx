@@ -97,30 +97,30 @@ const Navbar = ({ session }: Props) => {
                   <CircleUser />
                   {t("common.profile")}
                 </DropdownMenuItem>
-                <Link href="/dashboard">
+                <a href="/dashboard">
                   <DropdownMenuItem>
                     <CircleGauge />
                     {t("common.dashboard")}
                   </DropdownMenuItem>
-                </Link>
+                </a>
                 <DropdownMenuSeparator />
-                <Link href="/auth/logout">
+                <a href="/auth/logout">
                   <DropdownMenuItem>
                     <LogOut />
                     {t("common.logout")}
                   </DropdownMenuItem>
-                </Link>
+                </a>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Link href="/auth/login">
+            <a href="/auth/login">
               <Button
                 variant="outline"
                 className="hidden sm:inline-flex rounded-full"
               >
                 {t("common.login")}
               </Button>
-            </Link>
+            </a>
           )}
 
           <ModeToggle />

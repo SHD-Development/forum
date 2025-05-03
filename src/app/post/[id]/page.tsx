@@ -32,7 +32,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import toast from "react-hot-toast";
-import Link from "next/link";
 import appConfig from "@/config";
 
 function isValidUrl(url: string | null | undefined): boolean {
@@ -157,12 +156,12 @@ export default function PostDetailPage() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
         <div className="container max-w-4xl mx-auto py-6 px-4">
-          <Link href="/">
+          <a href="/">
             <Button variant="ghost" className="mb-6 hover:bg-gray-800" disabled>
               <ChevronLeft className="mr-2 h-4 w-4" />
               Back
             </Button>
-          </Link>
+          </a>
           <Card className="bg-gray-900 border-gray-800 overflow-hidden shadow-xl">
             <Skeleton className="w-full h-80 bg-gray-800" />
             <div className="p-6 border-b border-gray-800">
@@ -198,12 +197,12 @@ export default function PostDetailPage() {
           <div className="flex flex-col items-center justify-center h-60 text-center">
             <h2 className="text-2xl font-bold mb-4">文章載入失敗</h2>
             <p className="text-gray-400 mb-6">{error || "無法找到此文章"}</p>
-            <Link href="/">
+            <a href="/">
               <Button>
                 <ChevronLeft className="mr-2 h-4 w-4" />
                 Back
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
@@ -225,12 +224,12 @@ export default function PostDetailPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
       <div className="container max-w-4xl mx-auto py-6 px-4">
-        <Link href="/">
+        <a href="/">
           <Button variant="ghost" className="mb-6 hover:bg-gray-800">
             <ChevronLeft className="mr-2 h-4 w-4" />
             Back
           </Button>
-        </Link>
+        </a>
         <Card className="bg-gray-900 border-gray-800 overflow-hidden shadow-xl">
           {shouldShowCoverImage && (
             <div className="w-full h-80 relative">

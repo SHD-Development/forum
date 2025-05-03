@@ -105,7 +105,7 @@ export function PostCard({ post }: PostCardProps) {
   };
 
   return (
-    <Link
+    <a
       href={`/post/${post.id}`}
       className="block hover:opacity-90 hover:scale-105 transition-all duration-200"
     >
@@ -190,6 +190,6 @@ export function PostCard({ post }: PostCardProps) {
           </time>
         </CardFooter>
       </Card>
-    </Link>
+    </a>
   );
 }

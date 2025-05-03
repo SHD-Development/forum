@@ -31,7 +31,6 @@ import {
 } from "@/components/ui/sidebar";
 import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
   session: Session | null;
 };
@@ -168,7 +167,7 @@ export function AppSidebar({ session, ...props }: AppSidebarProps) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link href="/" className="group/home">
+              <a href="/" className="group/home">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <Cloud />
                 </div>
@@ -183,7 +182,7 @@ export function AppSidebar({ session, ...props }: AppSidebarProps) {
                     </span>
                   </div>
                 </div>
-              </Link>
+              </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -191,12 +190,12 @@ export function AppSidebar({ session, ...props }: AppSidebarProps) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Platform</SidebarGroupLabel>
-          <Link href="/dashboard">
+          <a href="/dashboard">
             <SidebarMenuButton>
               <CircleGauge />
               Dashboard
             </SidebarMenuButton>
-          </Link>
+          </a>
         </SidebarGroup>
         <NavMain items={data.navMain} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />

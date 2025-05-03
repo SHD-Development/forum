@@ -102,12 +102,12 @@ export function NavUser({ user }: { user: any }) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <Link href="/auth/logout">
+            <a href="/auth/logout">
               <DropdownMenuItem>
                 <LogOut />
                 {t("common.logout")}
               </DropdownMenuItem>
-            </Link>
+            </a>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
