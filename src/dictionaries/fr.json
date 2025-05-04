@@ -1,0 +1,75 @@
+{
+    "appName": "Forum Loli",
+    "common": {
+      "register": "S'inscrire",
+      "login": "Se connecter",
+      "logout": "Se déconnecter",
+      "account": "Compte",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "email": "Adresse e-mail",
+      "dashboard": "Tableau de bord",
+      "settings": "Paramètres",
+      "profile": "Profil",
+      "languages": "Langues"
+    },
+    "navbar": {
+      "greetings": "Bonjour, ",
+      "search": "Rechercher"
+    },
+    "homePage": {
+      "latestPosts": "Derniers messages",
+      "latestPostsDescription": "Découvrez les sujets qui vous intéressent.",
+      "loading": "Chargement..."
+    },
+    "postsList": {
+      "loadingMorePosts": "Chargement de nouveaux messages...",
+      "noPosts": "Aucun message à afficher pour le moment.",
+      "createYourPost": "Créez votre premier message",
+      "tryAgain": "Réessayer",
+      "error": "Une erreur est survenue. Veuillez réessayer plus tard."
+    },
+    "postCard": {
+      "invalidURL": "URL de l'image invalide",
+      "unconfiguredHost": "Source d'image non fiable",
+      "loadError": "Erreur lors du chargement"
+    },
+    "themeSwitch": {
+      "light": "Thème clair",
+      "dark": "Thème sombre",
+      "system": "Par défaut du système",
+      "toggle": "Changer de thème"
+    },
+    "loginForm": {
+      "welcomeBack": "Bon retour parmi nous !",
+      "loginToContinue": "Veuillez vous connecter à votre compte Forum Loli",
+      "continueWith": "Continuer avec",
+      "termsOfService": "Conditions d'utilisation",
+      "privacyPolicy": "Politique de confidentialité",
+      "byClickingStart": "En vous connectant, vous acceptez nos ",
+      "byClickingAnd": "et notre ",
+      "byClickingEnd": "."
+    },
+    "createPostForm": {
+      "cardTitle": "Créer un message",
+      "cardDescription": "Partagez vos idées ou expériences et participez à la discussion !",
+      "title": "Titre du message",
+      "titlePlaceholder": "[Question] Que devrais-je faire pour...",
+      "cover": "Image de couverture",
+      "optional": "Facultatif",
+      "coverPlaceholder": "https://fileapi.example.com/uploads/Image.jpg",
+      "coverTooltip": "Vous pouvez téléverser une image ci-dessous et coller son lien ici, ou utiliser une autre URL d'image.",
+      "content": "Contenu du message",
+      "contentPlaceholder": "Saisissez le contenu de votre message ici",
+      "selectEmoji": "Choisir un emoji",
+      "breadcrumb1": "Messages",
+      "breadcrumb2": "Créer un message",
+      "mustLogin": "Vous devez être connecté pour créer un message.",
+      "failed": "Échec de la publication : ",
+      "error": "Une erreur est survenue. Veuillez réessayer plus tard.",
+      "success": "Message publié avec succès !",
+      "create": "Publier",
+      "creating": "Publication en cours..."
+    }
+  }
+  
