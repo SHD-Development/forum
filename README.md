@@ -1,12 +1,18 @@
 # A fully functional forum system built with Next.js
 > This is still a Work In Proccess project, so there might be a lot of bugs and issues.
 # Features✨
+- Nice & Clean UI
 - OAuth2 Authentication
 - Dark / Light Mode
 - Internationalization(i18n) Support
 - User Dashboard
 - Infinite Scroll Post Feed
 - Create Posts
+- Edit Posts
+- Delete Posts
+- Bulk Deletion
+- Searching (Management Page)
+- Preview Posts
 - View Posts
 - GET, POST, PATCH, DELETE RESTful APIs
 # Installation
