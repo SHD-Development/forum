@@ -703,7 +703,7 @@ export default function PostsManagePage() {
           <DialogHeader>
             <DialogTitle>{t("comfirmDeletion")}</DialogTitle>
             <DialogDescription>
-              {t("comfirmDeletionStart")} "{currentPost?.title}"{" "}
+              {t("comfirmDeletionStart")} {currentPost?.title}{" "}
               {t("comfirmDeletionEnd")}
             </DialogDescription>
           </DialogHeader>
