@@ -1,0 +1,75 @@
+{
+    "appName": "Форум Loli",
+    "common": {
+      "register": "Зарегистрироваться",
+      "login": "Войти",
+      "logout": "Выйти",
+      "account": "Аккаунт",
+      "password": "Пароль",
+      "confirmPassword": "Подтвердите пароль",
+      "email": "Электронная почта",
+      "dashboard": "Главная панель",
+      "settings": "Настройки",
+      "profile": "Профиль",
+      "languages": "Языки"
+    },
+    "navbar": {
+      "greetings": "Привет, ",
+      "search": "Поиск"
+    },
+    "homePage": {
+      "latestPosts": "Последние посты",
+      "latestPostsDescription": "Изучайте темы, которые вам интересны.",
+      "loading": "Загрузка..."
+    },
+    "postsList": {
+      "loadingMorePosts": "Загрузка дополнительных постов...",
+      "noPosts": "Пока что нет постов для отображения.",
+      "createYourPost": "Опубликуйте свой первый пост",
+      "tryAgain": "Попробовать снова",
+      "error": "Произошла ошибка. Пожалуйста, попробуйте позже."
+    },
+    "postCard": {
+      "invalidURL": "Недопустимый URL изображения",
+      "unconfiguredHost": "Ненадежный источник изображения",
+      "loadError": "Ошибка при загрузке изображения"
+    },
+    "themeSwitch": {
+      "light": "Светлая тема",
+      "dark": "Темная тема",
+      "system": "Системная тема",
+      "toggle": "Переключить тему"
+    },
+    "loginForm": {
+      "welcomeBack": "С возвращением!",
+      "loginToContinue": "Пожалуйста, войдите в аккаунт Loli Форум",
+      "continueWith": "Продолжить через",
+      "termsOfService": "Условия использования",
+      "privacyPolicy": "Политика конфиденциальности",
+      "byClickingStart": "Вход означает согласие с нашими ",
+      "byClickingAnd": "и",
+      "byClickingEnd": "."
+    },
+    "createPostForm": {
+      "cardTitle": "Создать пост",
+      "cardDescription": "Поделитесь мыслями или опытом и присоединяйтесь к обсуждению!",
+      "title": "Заголовок поста",
+      "titlePlaceholder": "[Вопрос] Что мне нужно сделать, чтобы...",
+      "cover": "Обложка",
+      "optional": "Необязательно",
+      "coverPlaceholder": "https://fileapi.example.com/uploads/Image.jpg",
+      "coverTooltip": "Вы можете загрузить изображение ниже и вставить его ссылку сюда или использовать другой URL.",
+      "content": "Содержимое поста",
+      "contentPlaceholder": "Введите содержимое вашего поста здесь",
+      "selectEmoji": "Выбрать эмодзи",
+      "breadcrumb1": "Посты",
+      "breadcrumb2": "Создать пост",
+      "mustLogin": "Необходимо войти, чтобы создать пост.",
+      "failed": "Не удалось опубликовать пост: ",
+      "error": "Произошла ошибка. Пожалуйста, попробуйте позже.",
+      "success": "Пост успешно опубликован!",
+      "create": "Опубликовать",
+      "creating": "Публикация поста..."
+    }
+  }
+  

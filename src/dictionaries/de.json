@@ -1,0 +1,75 @@
+{
+    "appName": "Loli Forum",
+    "common": {
+      "register": "Registrieren",
+      "login": "Anmelden",
+      "logout": "Abmelden",
+      "account": "Konto",
+      "password": "Passwort",
+      "confirmPassword": "Passwort bestätigen",
+      "email": "E-Mail",
+      "dashboard": "Übersicht",
+      "settings": "Einstellungen",
+      "profile": "Profil",
+      "languages": "Sprachen"
+    },
+    "navbar": {
+      "greetings": "Hallo, ",
+      "search": "Suche"
+    },
+    "homePage": {
+      "latestPosts": "Neueste Beiträge",
+      "latestPostsDescription": "Entdecke Themen, die dich interessieren.",
+      "loading": "Lade..."
+    },
+    "postsList": {
+      "loadingMorePosts": "Weitere Beiträge werden geladen...",
+      "noPosts": "Zurzeit sind keine Beiträge verfügbar.",
+      "createYourPost": "Erstelle deinen ersten Beitrag",
+      "tryAgain": "Erneut versuchen",
+      "error": "Ein Fehler ist aufgetreten. Bitte versuche es später erneut."
+    },
+    "postCard": {
+      "invalidURL": "Ungültige Bild-URL",
+      "unconfiguredHost": "Nicht vertrauenswürdige Bildquelle",
+      "loadError": "Fehler beim Laden"
+    },
+    "themeSwitch": {
+      "light": "Helles Design",
+      "dark": "Dunkles Design",
+      "system": "Systemstandard",
+      "toggle": "Design wechseln"
+    },
+    "loginForm": {
+      "welcomeBack": "Willkommen zurück!",
+      "loginToContinue": "Bitte melde dich bei deinem Loli Forum-Konto an",
+      "continueWith": "Weiter mit",
+      "termsOfService": "Nutzungsbedingungen",
+      "privacyPolicy": "Datenschutzrichtlinie",
+      "byClickingStart": "Mit der Anmeldung akzeptierst du unsere ",
+      "byClickingAnd": "und",
+      "byClickingEnd": "."
+    },
+    "createPostForm": {
+      "cardTitle": "Beitrag erstellen",
+      "cardDescription": "Teile deine Gedanken oder Erlebnisse und mach mit bei der Diskussion!",
+      "title": "Beitragstitel",
+      "titlePlaceholder": "[Frage] Was soll ich tun, um...",
+      "cover": "Titelbild",
+      "optional": "Optional",
+      "coverPlaceholder": "https://fileapi.example.com/uploads/Image.jpg",
+      "coverTooltip": "Du kannst unten ein Bild hochladen und den Link hier einfügen oder eine andere Bild-URL verwenden.",
+      "content": "Beitragsinhalt",
+      "contentPlaceholder": "Gib hier den Inhalt deines Beitrags ein",
+      "selectEmoji": "Emoji auswählen",
+      "breadcrumb1": "Beiträge",
+      "breadcrumb2": "Beitrag erstellen",
+      "mustLogin": "Du musst angemeldet sein, um einen Beitrag zu erstellen.",
+      "failed": "Beitrag konnte nicht veröffentlicht werden: ",
+      "error": "Ein Fehler ist aufgetreten. Bitte versuche es später erneut.",
+      "success": "Beitrag erfolgreich veröffentlicht!",
+      "create": "Veröffentlichen",
+      "creating": "Beitrag wird veröffentlicht..."
+    }
+  }
+  

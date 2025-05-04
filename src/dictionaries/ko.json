@@ -1,0 +1,75 @@
+{
+    "appName": "로리 포럼",
+    "common": {
+      "register": "회원가입",
+      "login": "로그인",
+      "logout": "로그아웃",
+      "account": "계정",
+      "password": "비밀번호",
+      "confirmPassword": "비밀번호 확인",
+      "email": "이메일",
+      "dashboard": "대시보드",
+      "settings": "설정",
+      "profile": "프로필",
+      "languages": "언어"
+    },
+    "navbar": {
+      "greetings": "안녕하세요, ",
+      "search": "검색"
+    },
+    "homePage": {
+      "latestPosts": "최신 게시물",
+      "latestPostsDescription": "관심 있는 주제를 탐색하세요.",
+      "loading": "로딩 중..."
+    },
+    "postsList": {
+      "loadingMorePosts": "게시물을 더 불러오는 중...",
+      "noPosts": "현재 표시할 게시물이 없습니다.",
+      "createYourPost": "첫 번째 게시물을 작성해보세요",
+      "tryAgain": "다시 시도",
+      "error": "오류가 발생했습니다. 나중에 다시 시도해주세요."
+    },
+    "postCard": {
+      "invalidURL": "잘못된 이미지 URL",
+      "unconfiguredHost": "신뢰할 수 없는 이미지 출처",
+      "loadError": "불러오는 중 오류 발생"
+    },
+    "themeSwitch": {
+      "light": "라이트 테마",
+      "dark": "다크 테마",
+      "system": "시스템 기본값",
+      "toggle": "테마 전환"
+    },
+    "loginForm": {
+      "welcomeBack": "다시 오신 것을 환영합니다!",
+      "loginToContinue": "로리 포럼 계정으로 로그인해주세요",
+      "continueWith": "다음으로 계속하기",
+      "termsOfService": "서비스 약관",
+      "privacyPolicy": "개인정보 처리방침",
+      "byClickingStart": "로그인함으로써, ",
+      "byClickingAnd": "와 ",
+      "byClickingEnd": "에 동의하는 것으로 간주됩니다."
+    },
+    "createPostForm": {
+      "cardTitle": "게시물 작성",
+      "cardDescription": "당신의 생각이나 경험을 공유하고 토론에 참여하세요!",
+      "title": "게시물 제목",
+      "titlePlaceholder": "[질문] 어떻게 해야...",
+      "cover": "표지 이미지",
+      "optional": "선택 사항",
+      "coverPlaceholder": "[https://fileapi.example.com/uploads/Image.jpg](https://fileapi.example.com/uploads/Image.jpg)",
+      "coverTooltip": "아래에 이미지를 업로드하고 링크를 여기에 붙여넣거나 다른 이미지 URL을 사용할 수 있습니다.",
+      "content": "게시물 내용",
+      "contentPlaceholder": "여기에 게시물 내용을 입력하세요",
+      "selectEmoji": "이모지 선택",
+      "breadcrumb1": "게시물",
+      "breadcrumb2": "게시물 작성",
+      "mustLogin": "게시물을 작성하려면 로그인해야 합니다.",
+      "failed": "게시물 작성에 실패했습니다: ",
+      "error": "오류가 발생했습니다. 나중에 다시 시도해주세요.",
+      "success": "게시물이 성공적으로 게시되었습니다!",
+      "create": "게시",
+      "creating": "게시물 작성 중..."
+    }
+  }
+  

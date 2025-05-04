@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useTranslations } from "next-intl";
-import { US, TW, CN, JP } from "country-flag-icons/react/3x2";
+import { US, TW, CN, JP, DE, RU, FR, KR } from "country-flag-icons/react/3x2";
 export const LanguageSwitcher = () => {
   const [locale, setLocale] = useState<string>("");
   const router = useRouter();
@@ -55,6 +55,18 @@ export const LanguageSwitcher = () => {
             </SelectItem>
             <SelectItem value="jp">
               <JP /> 日本語 (日本)
+            </SelectItem>
+            <SelectItem value="ko">
+              <KR /> 한국어 (대한민국)
+            </SelectItem>
+            <SelectItem value="fr">
+              <FR /> Français (France)
+            </SelectItem>
+            <SelectItem value="de">
+              <DE /> Deutsch (Deutschland)
+            </SelectItem>
+            <SelectItem value="ru">
+              <RU /> Русский (Россия)
             </SelectItem>
           </SelectGroup>
         </SelectContent>
