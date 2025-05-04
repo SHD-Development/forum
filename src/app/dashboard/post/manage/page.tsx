@@ -66,7 +66,9 @@ import {
 } from "@/components/ui/tooltip";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-
+import { TiptapHTMLRenderer } from "@/components/tiptap-renderer";
+import { DialogTrigger } from "@radix-ui/react-dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 interface Author {
   id?: string;
   name: string;
@@ -104,6 +106,8 @@ export default function PostsManagePage() {
   const [isBulkDeleteDialogOpen, setIsBulkDeleteDialogOpen] =
     useState<boolean>(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState<boolean>(false);
+  const [isPreviewDialogOpen, setIsPreviewDialogOpen] =
+    useState<boolean>(false);
   const [currentPost, setCurrentPost] = useState<Post | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [editForm, setEditForm] = useState({
@@ -230,6 +234,10 @@ export default function PostsManagePage() {
     setIsDeleteDialogOpen(true);
   };
 
+  const handleOpenPreview = () => {
+    setIsPreviewDialogOpen(true);
+  };
+
   const handleEditorReady = (editor: Editor) => {
     editorRef.current = editor;
   };
@@ -305,17 +313,6 @@ export default function PostsManagePage() {
     if (!dateString) return "N/A";
     return new Date(dateString).toLocaleDateString();
   };
-
-  //   const renderContentPreview = (content: any): string => {
-  //     if (typeof content === "string") {
-  //       return content.length > 50 ? content.substring(0, 50) + "..." : content;
-  //     } else if (Array.isArray(content)) {
-  //       return "Complex content (rich text)";
-  //     } else if (typeof content === "object" && content !== null) {
-  //       return "Complex content (object)";
-  //     }
-  //     return "No content";
-  //   };
 
   return (
     <div className="container mx-auto py-8 px-4 lg:px-16 flex min-h-full items-center justify-center min-w-full">
@@ -647,7 +644,58 @@ export default function PostsManagePage() {
             >
               Cancel
             </Button>
+            <Button variant="outline" onClick={handleOpenPreview}>
+              Preview
+            </Button>
             <Button onClick={handleEditPost}>Save Changes</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Preview Dialog */}
+      <Dialog open={isPreviewDialogOpen} onOpenChange={setIsPreviewDialogOpen}>
+        <DialogContent className="sm:max-w-[70%] max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Post Preview</DialogTitle>
+            <DialogDescription>
+              This is how your post will appear to readers.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-4 space-y-4">
+            {editForm.cover && (
+              <div className="w-full relative h-[200px] mb-4">
+                <img
+                  src={editForm.cover}
+                  alt="Cover preview"
+                  className="w-full h-full object-cover rounded-md"
+                />
+              </div>
+            )}
+            {editForm.title ? (
+              <h1 className="text-2xl font-bold">{editForm.title}</h1>
+            ) : (
+              <div className="p-4 border border-dashed rounded-md text-center text-gray-500">
+                Empty title
+              </div>
+            )}
+            <div className="prose max-w-none dark:prose-invert">
+              {editForm.content &&
+              typeof editForm.content === "object" &&
+              "content" in editForm.content &&
+              Array.isArray(editForm.content.content) &&
+              editForm.content.content.length > 0 ? (
+                <TiptapHTMLRenderer content={editForm.content} />
+              ) : (
+                <div className="p-8 border border-dashed rounded-md text-center text-gray-500">
+                  Empty content
+                </div>
+              )}
+            </div>
+          </div>
+          <DialogFooter>
+            <Button onClick={() => setIsPreviewDialogOpen(false)}>
+              Close Preview
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -69,6 +69,12 @@
     "error": "發生錯誤，請稍後再試。",
     "success": "文章發布成功！",
     "create": "發佈",
-    "creating": "正在發布文章..."
+    "creating": "正在發布文章...",
+    "emptyTitle": "標題為空",
+    "emptyContent": "內容為空",
+    "closePreview": "關閉預覽",
+    "preview": "預覽",
+    "previewTitle": "預覽文章",
+    "previewDescription": "再三檢查唷！"
   }
 }

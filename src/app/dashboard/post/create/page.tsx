@@ -27,6 +27,8 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import {
   Card,
@@ -39,6 +41,7 @@ import {
 import { CircleHelp } from "lucide-react";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import { TiptapHTMLRenderer } from "@/components/tiptap-renderer";
 import { useTranslations } from "next-intl";
 export default function CreatePostPage() {
   const [value, setValue] = useState<Content>("");
@@ -46,9 +49,15 @@ export default function CreatePostPage() {
   const [cover, setCover] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
+  const [isPreviewDialogOpen, setIsPreviewDialogOpen] =
+    useState<boolean>(false);
   const [currentInputTarget, setCurrentInputTarget] = useState<
     "title" | "content"
   >("title");
+
+  const handleOpenPreview = () => {
+    setIsPreviewDialogOpen(true);
+  };
   const editorRef = useRef<Editor | null>(null);
   const router = useRouter();
   const t = useTranslations("createPostForm");
@@ -241,9 +250,16 @@ export default function CreatePostPage() {
               </div>
             </CardContent>
 
-            <CardFooter className="flex justify-center w-full">
+            <CardFooter className="flex justify-center w-full flex-col md:flex-row">
               <Button
                 variant="outline"
+                type="button"
+                className="w-full md:w-auto mt-6 mx-3"
+                onClick={handleOpenPreview}
+              >
+                預覽
+              </Button>
+              <Button
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full md:w-auto mt-6"
@@ -275,6 +291,51 @@ export default function CreatePostPage() {
               className="w-full"
             />
           </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isPreviewDialogOpen} onOpenChange={setIsPreviewDialogOpen}>
+        <DialogContent className="sm:max-w-[70%] max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>{t("previewTitle")}</DialogTitle>
+            <DialogDescription>{t("previewDescription")}</DialogDescription>
+          </DialogHeader>
+          <div className="mt-4 space-y-4">
+            {cover && (
+              <div className="w-full relative h-[200px] mb-4">
+                <img
+                  src={cover}
+                  alt="Cover preview"
+                  className="w-full h-full object-cover rounded-md"
+                />
+              </div>
+            )}
+            {title ? (
+              <h1 className="text-2xl font-bold">{title}</h1>
+            ) : (
+              <div className="p-4 border border-dashed rounded-md text-center text-gray-500">
+                {t("emptyTitle")}
+              </div>
+            )}
+            <div className="prose max-w-none dark:prose-invert">
+              {value &&
+              typeof value === "object" &&
+              "content" in value &&
+              Array.isArray(value.content) &&
+              value.content.length > 0 ? (
+                <TiptapHTMLRenderer content={value} />
+              ) : (
+                <div className="p-8 border border-dashed rounded-md text-center text-gray-500">
+                  {t("emptyContent")}
+                </div>
+              )}
+            </div>
+          </div>
+          <DialogFooter>
+            <Button onClick={() => setIsPreviewDialogOpen(false)}>
+              {t("closePreview")}
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </>
