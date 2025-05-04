@@ -67,8 +67,7 @@ import {
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { TiptapHTMLRenderer } from "@/components/tiptap-renderer";
-import { DialogTrigger } from "@radix-ui/react-dialog";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslations } from "next-intl";
 interface Author {
   id?: string;
   name: string;
@@ -128,7 +127,7 @@ export default function PostsManagePage() {
   const editorRef = useRef<Editor | null>(null);
   const postsPerPage = 10;
   const router = useRouter();
-
+  const t = useTranslations("managePostsPage");
   const fetchPosts = async (page = 1) => {
     try {
       setLoading(true);
@@ -141,7 +140,7 @@ export default function PostsManagePage() {
       setCurrentPage(data.pagination.current);
     } catch (error) {
       console.error("Error fetching posts:", error);
-      toast.error("Failed to fetch posts. Please try again.");
+      toast.error(t("failedToFetch"));
     } finally {
       setLoading(false);
     }
@@ -265,13 +264,13 @@ export default function PostsManagePage() {
         content: editForm.content,
       });
 
-      toast.success("Post updated successfully");
+      toast.success(t("updateSuccess"));
 
       setIsEditDialogOpen(false);
       fetchPosts(currentPage);
     } catch (error) {
       console.error("Error updating post:", error);
-      toast.error("Failed to update post. Please try again.");
+      toast.error(t("updateFailed"));
     }
   };
 
@@ -281,14 +280,14 @@ export default function PostsManagePage() {
     try {
       const response = await axios.delete(`/api/post/${currentPost.id}`);
 
-      toast.success("Post deleted successfully");
+      toast.success(t("deleteSuccess"));
 
       setIsDeleteDialogOpen(false);
       setSelectedPosts(selectedPosts.filter((id) => id !== currentPost.id));
       fetchPosts(currentPage);
     } catch (error) {
       console.error("Error deleting post:", error);
-      toast.error("Failed to delete post. Please try again.");
+      toast.error(t("deleteFailed"));
     }
   };
 
@@ -298,14 +297,14 @@ export default function PostsManagePage() {
         selectedPosts.map((postId) => axios.delete(`/api/post/${postId}`))
       );
 
-      toast.success(`${selectedPosts.length} posts deleted successfully`);
+      toast.success(`${selectedPosts.length} ${t("bulkDeleteSuccess")}`);
 
       setIsBulkDeleteDialogOpen(false);
       setSelectedPosts([]);
       fetchPosts(currentPage);
     } catch (error) {
       console.error("Error bulk deleting posts:", error);
-      toast.error("Failed to delete some posts. Please try again.");
+      toast.error(t("bulkDeleteFailed"));
     }
   };
 
@@ -320,13 +319,11 @@ export default function PostsManagePage() {
         <CardHeader>
           <div className="flex justify-between items-center">
             <div>
-              <CardTitle className="text-2xl">Posts Management</CardTitle>
-              <CardDescription>
-                Manage your posts - edit, delete or create new posts.
-              </CardDescription>
+              <CardTitle className="text-2xl">{t("cardTitle")}</CardTitle>
+              <CardDescription>{t("cardDescription")}</CardDescription>
             </div>
             <Button onClick={() => router.push("/dashboard/post/create")}>
-              <Plus className="mr-2 h-4 w-4" /> New Post
+              <Plus className="mr-2 h-4 w-4" /> {t("newPost")}
             </Button>
           </div>
         </CardHeader>
@@ -335,7 +332,7 @@ export default function PostsManagePage() {
             <div className="relative">
               <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search posts..."
+                placeholder={t("searchPosts")}
                 className="pl-8 w-64"
                 value={searchQuery}
                 onChange={handleSearch}
@@ -348,7 +345,7 @@ export default function PostsManagePage() {
                 onClick={() => setIsBulkDeleteDialogOpen(true)}
               >
                 <Trash className="mr-2 h-4 w-4" />
-                Delete Selected ({selectedPosts.length})
+                {t("deleteSelected")} ({selectedPosts.length})
               </Button>
             )}
           </div>
@@ -373,16 +370,16 @@ export default function PostsManagePage() {
                           aria-label="Select all posts"
                         />
                       </TableHead>
-                      <TableHead className="w-30">ID</TableHead>
-                      <TableHead className="w-full">Title</TableHead>
+                      <TableHead className="w-30">{t("id")}</TableHead>
+                      <TableHead className="w-full">{t("title")}</TableHead>
                       <TableHead className="hidden md:table-cell w-30">
-                        Author
+                        {t("author")}
                       </TableHead>
                       <TableHead className="hidden md:table-cell w-30">
-                        Created
+                        {t("created")}
                       </TableHead>
                       <TableHead className="hidden md:table-cell w-30">
-                        Updated
+                        {t("updated")}
                       </TableHead>
                     </TableRow>
                   </TableHeader>
@@ -390,9 +387,7 @@ export default function PostsManagePage() {
                     {filteredPosts.length === 0 ? (
                       <TableRow>
                         <TableCell colSpan={7} className="h-24 text-center">
-                          {searchQuery
-                            ? "No posts match your search query"
-                            : "No posts found"}
+                          {searchQuery ? t("noPostsFound") : t("noPosts")}
                         </TableCell>
                       </TableRow>
                     ) : (
@@ -430,30 +425,36 @@ export default function PostsManagePage() {
                               <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" size="sm">
                                   <MoreHorizontal className="h-4 w-4" />
-                                  <span className="sr-only">Open menu</span>
+                                  <span className="sr-only">
+                                    {t("openMenu")}
+                                  </span>
                                 </Button>
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="start">
                                 <DropdownMenuLabel>
-                                  <p className="text-zinc-500">Actions</p>
+                                  <p className="text-zinc-500">
+                                    {t("actions")}
+                                  </p>
                                 </DropdownMenuLabel>
                                 <a href={`/post/${post.id}`}>
                                   <DropdownMenuItem>
                                     <Eye className="mr-2 h-4 w-4" />
-                                    View
+                                    {t("view")}
                                   </DropdownMenuItem>
                                 </a>
                                 <DropdownMenuItem
                                   onClick={() => handleOpenEditDialog(post)}
                                 >
-                                  <Edit className="mr-2 h-4 w-4" /> Edit
+                                  <Edit className="mr-2 h-4 w-4" />
+                                  {t("edit")}
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem
                                   className="text-destructive"
                                   onClick={() => handleOpenDeleteDialog(post)}
                                 >
-                                  <Trash className="mr-2 h-4 w-4" /> Delete
+                                  <Trash className="mr-2 h-4 w-4" />
+                                  {t("delete")}
                                 </DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
@@ -544,13 +545,11 @@ export default function PostsManagePage() {
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent className="flex flex-col sm:max-w-[60%] mx-auto max-h-[80vh] overflow-y-auto">
           <DialogHeader className="">
-            <DialogTitle>Edit Post</DialogTitle>
-            <DialogDescription>
-              Make changes to the post and click save when done.
-            </DialogDescription>
+            <DialogTitle>{t("editPost")}</DialogTitle>
+            <DialogDescription>{t("editPostDescription")}</DialogDescription>
           </DialogHeader>
           <label htmlFor="title" className="text-left text-sm font-medium">
-            Title
+            {t("title")}
           </label>
           <div className="col-span-3 flex items-center gap-2">
             <Input
@@ -571,7 +570,7 @@ export default function PostsManagePage() {
             </Button>
           </div>
           <label htmlFor="cover" className="text-left text-sm font-medium">
-            Cover Image URL
+            {t("cover")}
           </label>
           <div className="col-span-3 flex items-center gap-2">
             <Input
@@ -581,19 +580,19 @@ export default function PostsManagePage() {
                 setEditForm({ ...editForm, cover: e.target.value })
               }
               className="flex-grow"
-              placeholder="https://example.com/image.jpg"
+              placeholder={t("coverPlaceholder")}
             />
             <Tooltip>
               <TooltipTrigger className="cursor-pointer">
                 <CircleHelp size={18} />
               </TooltipTrigger>
               <TooltipContent className="w-48 text-center">
-                <p className="text-sm">Enter a URL for the post cover image.</p>
+                <p className="text-sm">{t("coverTooltip")}</p>
               </TooltipContent>
             </Tooltip>
           </div>
           <label htmlFor="content" className="text-left text-sm font-medium">
-            Content
+            {t("content")}
           </label>
           <div className="col-span-3">
             <MinimalTiptapEditor
@@ -602,7 +601,7 @@ export default function PostsManagePage() {
               className="border rounded-md"
               editorContentClassName="p-5"
               output="json"
-              placeholder="Write your post content here..."
+              placeholder={t("contentPlaceholder")}
               autofocus={false}
               editable={true}
               editorClassName="focus:outline-hidden"
@@ -622,8 +621,8 @@ export default function PostsManagePage() {
               >
                 <DialogHeader>
                   <DialogTitle>
-                    Select Emoji -{" "}
-                    {currentInputTarget === "title" ? "Title" : "Content"}
+                    {t("selectEmoji")} -{" "}
+                    {currentInputTarget === "title" ? t("title") : t("content")}
                   </DialogTitle>
                 </DialogHeader>
                 <div className="pt-4 pb-2">
@@ -642,12 +641,12 @@ export default function PostsManagePage() {
               variant="outline"
               onClick={() => setIsEditDialogOpen(false)}
             >
-              Cancel
+              {t("cancel")}
             </Button>
             <Button variant="outline" onClick={handleOpenPreview}>
-              Preview
+              {t("preview")}
             </Button>
-            <Button onClick={handleEditPost}>Save Changes</Button>
+            <Button onClick={handleEditPost}>{t("save")}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -656,10 +655,8 @@ export default function PostsManagePage() {
       <Dialog open={isPreviewDialogOpen} onOpenChange={setIsPreviewDialogOpen}>
         <DialogContent className="sm:max-w-[70%] max-h-[80vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Post Preview</DialogTitle>
-            <DialogDescription>
-              This is how your post will appear to readers.
-            </DialogDescription>
+            <DialogTitle>{t("previewTitle")}</DialogTitle>
+            <DialogDescription>{t("previewDescription")}</DialogDescription>
           </DialogHeader>
           <div className="mt-4 space-y-4">
             {editForm.cover && (
@@ -675,7 +672,7 @@ export default function PostsManagePage() {
               <h1 className="text-2xl font-bold">{editForm.title}</h1>
             ) : (
               <div className="p-4 border border-dashed rounded-md text-center text-gray-500">
-                Empty title
+                {t("emptyTitle")}
               </div>
             )}
             <div className="prose max-w-none dark:prose-invert">
@@ -687,14 +684,14 @@ export default function PostsManagePage() {
                 <TiptapHTMLRenderer content={editForm.content} />
               ) : (
                 <div className="p-8 border border-dashed rounded-md text-center text-gray-500">
-                  Empty content
+                  {t("emptyContent")}
                 </div>
               )}
             </div>
           </div>
           <DialogFooter>
             <Button onClick={() => setIsPreviewDialogOpen(false)}>
-              Close Preview
+              {t("closePreview")}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -704,10 +701,10 @@ export default function PostsManagePage() {
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogTitle>{t("comfirmDeletion")}</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete "{currentPost?.title}"? This
-              action cannot be undone.
+              {t("comfirmDeletionStart")} "{currentPost?.title}"{" "}
+              {t("comfirmDeletionEnd")}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -715,10 +712,10 @@ export default function PostsManagePage() {
               variant="outline"
               onClick={() => setIsDeleteDialogOpen(false)}
             >
-              Cancel
+              {t("cancel")}
             </Button>
             <Button variant="destructive" onClick={handleDeletePost}>
-              Delete
+              {t("delete")}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -731,10 +728,10 @@ export default function PostsManagePage() {
       >
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Confirm Bulk Deletion</DialogTitle>
+            <DialogTitle>{t("comfirmBulkDeletion")}</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete {selectedPosts.length} selected
-              posts? This action cannot be undone.
+              {t("comfirmBulkDeletionStart")} {selectedPosts.length}{" "}
+              {t("comfirmBulkDeletionEnd")}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -742,10 +739,10 @@ export default function PostsManagePage() {
               variant="outline"
               onClick={() => setIsBulkDeleteDialogOpen(false)}
             >
-              Cancel
+              {t("cancel")}
             </Button>
             <Button variant="destructive" onClick={handleBulkDelete}>
-              Delete {selectedPosts.length} Posts
+              {t("bulkDelete")} {selectedPosts.length} {t("posts")}
             </Button>
           </DialogFooter>
         </DialogContent>
