@@ -94,8 +94,7 @@ export default function CreatePostPage() {
       });
 
       toast.success(t("success"), { id: toastId });
-
-      router.push("/dashboard/post/create");
+      router.push(`/post/${response.data.post.id}`);
     } catch (error) {
       console.error("Error creating post:", error);
 
