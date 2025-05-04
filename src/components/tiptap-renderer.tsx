@@ -6,7 +6,6 @@ import Image from "@tiptap/extension-image";
 import Underline from "@tiptap/extension-underline";
 import TextStyle from "@tiptap/extension-text-style";
 import Color from "@tiptap/extension-color";
-
 interface TiptapHTMLRendererProps {
   content: any;
   className?: string;
@@ -26,8 +25,10 @@ export function TiptapHTMLRenderer({
         Link,
         Image,
         Underline,
-        TextStyle,
-        Color,
+        TextStyle.configure({ mergeNestedSpanStyles: true }),
+        Color.configure({
+          types: ["textStyle"],
+        }),
       ]);
     } catch (e) {
       console.error("Error rendering Tiptap content:", e);
