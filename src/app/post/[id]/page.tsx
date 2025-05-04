@@ -143,8 +143,8 @@ export default function PostDetailPage() {
     }
 
     return (
-      <div className="flex items-center justify-center h-full w-full bg-gray-800">
-        <div className="flex flex-col items-center text-gray-400">
+      <div className="flex items-center justify-center h-full w-full bg-gray-200 dark:bg-gray-800">
+        <div className="flex flex-col items-center text-gray-600 dark:text-gray-400">
           <AlertCircle className="h-8 w-8 mb-2" />
           <span>{errorMessage}</span>
         </div>
@@ -154,35 +154,39 @@ export default function PostDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
+      <div className="min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100">
         <div className="container max-w-4xl mx-auto py-6 px-4">
           <Link href="/">
-            <Button variant="ghost" className="mb-6 hover:bg-gray-800" disabled>
+            <Button
+              variant="ghost"
+              className="mb-6 hover:bg-gray-100 dark:hover:bg-gray-800"
+              disabled
+            >
               <ChevronLeft className="mr-2 h-4 w-4" />
               Back
             </Button>
           </Link>
-          <Card className="bg-gray-900 border-gray-800 overflow-hidden shadow-xl">
-            <Skeleton className="w-full h-80 bg-gray-800" />
-            <div className="p-6 border-b border-gray-800">
-              <Skeleton className="h-8 w-3/4 mb-3 bg-gray-800" />
+          <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 overflow-hidden shadow-xl">
+            <Skeleton className="w-full h-80 bg-gray-200 dark:bg-gray-800" />
+            <div className="p-6 border-b border-gray-200 dark:border-gray-800">
+              <Skeleton className="h-8 w-3/4 mb-3 bg-gray-200 dark:bg-gray-800" />
               <div className="flex items-center space-x-4">
                 <div className="flex items-center">
-                  <Skeleton className="h-10 w-10 rounded-full bg-gray-800 mr-3" />
+                  <Skeleton className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-800 mr-3" />
                   <div>
-                    <Skeleton className="h-4 w-24 bg-gray-800 mb-2" />
-                    <Skeleton className="h-3 w-32 bg-gray-800" />
+                    <Skeleton className="h-4 w-24 bg-gray-200 dark:bg-gray-800 mb-2" />
+                    <Skeleton className="h-3 w-32 bg-gray-200 dark:bg-gray-800" />
                   </div>
                 </div>
               </div>
             </div>
             <div className="p-6">
-              <Skeleton className="h-4 w-full bg-gray-800 mb-4" />
-              <Skeleton className="h-4 w-full bg-gray-800 mb-4" />
-              <Skeleton className="h-4 w-3/4 bg-gray-800 mb-8" />
-              <Skeleton className="h-60 w-full bg-gray-800 mb-8" />
-              <Skeleton className="h-4 w-full bg-gray-800 mb-4" />
-              <Skeleton className="h-4 w-full bg-gray-800 mb-4" />
+              <Skeleton className="h-4 w-full bg-gray-200 dark:bg-gray-800 mb-4" />
+              <Skeleton className="h-4 w-full bg-gray-200 dark:bg-gray-800 mb-4" />
+              <Skeleton className="h-4 w-3/4 bg-gray-200 dark:bg-gray-800 mb-8" />
+              <Skeleton className="h-60 w-full bg-gray-200 dark:bg-gray-800 mb-8" />
+              <Skeleton className="h-4 w-full bg-gray-200 dark:bg-gray-800 mb-4" />
+              <Skeleton className="h-4 w-full bg-gray-200 dark:bg-gray-800 mb-4" />
             </div>
           </Card>
         </div>
@@ -192,11 +196,13 @@ export default function PostDetailPage() {
 
   if (error || !post) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
+      <div className="min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100">
         <div className="container max-w-4xl mx-auto py-8 px-4">
           <div className="flex flex-col items-center justify-center h-60 text-center">
             <h2 className="text-2xl font-bold mb-4">文章載入失敗</h2>
-            <p className="text-gray-400 mb-6">{error || "無法找到此文章"}</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              {error || "無法找到此文章"}
+            </p>
             <Link href="/">
               <Button>
                 <ChevronLeft className="mr-2 h-4 w-4" />
@@ -222,15 +228,18 @@ export default function PostDetailPage() {
     post.cover && isCoverUrlValid && isCoverDomainAllowed;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100">
       <div className="container max-w-4xl mx-auto py-6 px-4">
         <Link href="/">
-          <Button variant="ghost" className="mb-6 hover:bg-gray-800">
+          <Button
+            variant="ghost"
+            className="mb-6 hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
             <ChevronLeft className="mr-2 h-4 w-4" />
             Back
           </Button>
         </Link>
-        <Card className="bg-gray-900 border-gray-800 overflow-hidden shadow-xl">
+        <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 overflow-hidden shadow-xl">
           {shouldShowCoverImage && (
             <div className="w-full h-80 relative">
               {coverImageStatus === "error" ? (
@@ -262,7 +271,7 @@ export default function PostDetailPage() {
             </div>
           )}
 
-          <div className="p-6 border-b border-gray-800">
+          <div className="p-6 border-b border-gray-200 dark:border-gray-800">
             <div className="flex justify-between items-start">
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold mb-3">
@@ -281,13 +290,13 @@ export default function PostDetailPage() {
                         {post.author.name || "匿名用戶"}
                       </p>
                       <Tooltip>
-                        <TooltipTrigger className="text-sm text-gray-400 cursor-pointer">
-                          <p className="text-sm text-gray-400">
+                        <TooltipTrigger className="text-sm text-gray-600 dark:text-gray-400 cursor-pointer">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
                             {formattedDate}
                           </p>
                         </TooltipTrigger>
-                        <TooltipContent className="bg-zinc-900">
-                          <p className="text-sm dark:text-white">
+                        <TooltipContent className="bg-white dark:bg-zinc-900">
+                          <p className="text-sm text-gray-900 dark:text-white">
                             Last Updated: {formattedUpdateDate}
                           </p>
                         </TooltipContent>
@@ -296,7 +305,7 @@ export default function PostDetailPage() {
                   </div>
                   <Badge
                     variant="outline"
-                    className="text-blue-400 border-blue-400"
+                    className="text-blue-600 border-blue-600 dark:text-blue-400 dark:border-blue-400"
                   >
                     Original
                   </Badge>
@@ -311,18 +320,18 @@ export default function PostDetailPage() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align="end"
-                  className="bg-gray-800 border-gray-700"
+                  className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
                 >
-                  <DropdownMenuItem className="cursor-pointer hover:bg-gray-700">
+                  <DropdownMenuItem className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700">
                     Favorite
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    className="cursor-pointer hover:bg-gray-700"
+                    className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
                     onClick={shareLink}
                   >
                     Share Link
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer hover:bg-gray-700 text-red-400">
+                  <DropdownMenuItem className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600 dark:text-red-400">
                     Report
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -331,14 +340,14 @@ export default function PostDetailPage() {
           </div>
 
           <div className="p-6">
-            <div className="prose prose-lg max-w-none prose-invert">
+            <div className="prose prose-lg max-w-none dark:prose-invert">
               <div className="article-content">
                 <TiptapHTMLRenderer content={post.content} />
               </div>
             </div>
           </div>
 
-          <div className="px-6 border-t border-gray-800 overflow-auto">
+          <div className="px-6 border-t border-gray-200 dark:border-gray-800 overflow-auto">
             <div className="flex items-center justify-between mt-5">
               <div className="flex space-x-4 items-center">
                 <Button variant="ghost" className="flex items-center space-x-2">
@@ -362,13 +371,13 @@ export default function PostDetailPage() {
                 <div className="flex space-x-2 ml-3">
                   <Button
                     variant="outline"
-                    className="border-blue-500 text-blue-500 hover:bg-blue-500/10"
+                    className="border-blue-600 text-blue-600 hover:bg-blue-600/10 dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-500/10"
                   >
                     Edit Post
                   </Button>
                   <Button
                     variant="outline"
-                    className="border-red-500 text-red-500 hover:bg-red-500/10"
+                    className="border-red-600 text-red-600 hover:bg-red-600/10 dark:border-red-500 dark:text-red-500 dark:hover:bg-red-500/10"
                   >
                     Delete Post
                   </Button>
@@ -378,11 +387,13 @@ export default function PostDetailPage() {
           </div>
         </Card>
 
-        <Card className="bg-gray-900 border-gray-800 mt-6 p-6 shadow-xl">
+        <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 mt-6 p-6 shadow-xl">
           <h2 className="text-xl font-bold mb-4">Comments</h2>
           <div className="space-y-4">
             {/* Todo: Comment component */}
-            <p className="text-gray-400 text-center py-8">Be the first?</p>
+            <p className="text-gray-600 dark:text-gray-400 text-center py-8">
+              Be the first?
+            </p>
           </div>
         </Card>
       </div>
