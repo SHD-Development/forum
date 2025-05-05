@@ -6,6 +6,7 @@ const appConfig = {
     "fileapi.shdtw.cloud",
     "cdn.discordapp.com",
     "pic.re",
+    "api.nlcat.dpdns.org",
   ],
   coverRandomImageApiUrl: "https://pic.re/image",
 };
