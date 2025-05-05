@@ -1,75 +1,130 @@
 {
-    "appName": "Loli Forum",
-    "common": {
-      "register": "Registrieren",
-      "login": "Anmelden",
-      "logout": "Abmelden",
-      "account": "Konto",
-      "password": "Passwort",
-      "confirmPassword": "Passwort bestätigen",
-      "email": "E-Mail",
-      "dashboard": "Übersicht",
-      "settings": "Einstellungen",
-      "profile": "Profil",
-      "languages": "Sprachen"
-    },
-    "navbar": {
-      "greetings": "Hallo, ",
-      "search": "Suche"
-    },
-    "homePage": {
-      "latestPosts": "Neueste Beiträge",
-      "latestPostsDescription": "Entdecke Themen, die dich interessieren.",
-      "loading": "Lade..."
-    },
-    "postsList": {
-      "loadingMorePosts": "Weitere Beiträge werden geladen...",
-      "noPosts": "Zurzeit sind keine Beiträge verfügbar.",
-      "createYourPost": "Erstelle deinen ersten Beitrag",
-      "tryAgain": "Erneut versuchen",
-      "error": "Ein Fehler ist aufgetreten. Bitte versuche es später erneut."
-    },
-    "postCard": {
-      "invalidURL": "Ungültige Bild-URL",
-      "unconfiguredHost": "Nicht vertrauenswürdige Bildquelle",
-      "loadError": "Fehler beim Laden"
-    },
-    "themeSwitch": {
-      "light": "Helles Design",
-      "dark": "Dunkles Design",
-      "system": "Systemstandard",
-      "toggle": "Design wechseln"
-    },
-    "loginForm": {
-      "welcomeBack": "Willkommen zurück!",
-      "loginToContinue": "Bitte melde dich bei deinem Loli Forum-Konto an",
-      "continueWith": "Weiter mit",
-      "termsOfService": "Nutzungsbedingungen",
-      "privacyPolicy": "Datenschutzrichtlinie",
-      "byClickingStart": "Mit der Anmeldung akzeptierst du unsere ",
-      "byClickingAnd": "und",
-      "byClickingEnd": "."
-    },
-    "createPostForm": {
-      "cardTitle": "Beitrag erstellen",
-      "cardDescription": "Teile deine Gedanken oder Erlebnisse und mach mit bei der Diskussion!",
-      "title": "Beitragstitel",
-      "titlePlaceholder": "[Frage] Was soll ich tun, um...",
-      "cover": "Titelbild",
-      "optional": "Optional",
-      "coverPlaceholder": "https://fileapi.example.com/uploads/Image.jpg",
-      "coverTooltip": "Du kannst unten ein Bild hochladen und den Link hier einfügen oder eine andere Bild-URL verwenden.",
-      "content": "Beitragsinhalt",
-      "contentPlaceholder": "Gib hier den Inhalt deines Beitrags ein",
-      "selectEmoji": "Emoji auswählen",
-      "breadcrumb1": "Beiträge",
-      "breadcrumb2": "Beitrag erstellen",
-      "mustLogin": "Du musst angemeldet sein, um einen Beitrag zu erstellen.",
-      "failed": "Beitrag konnte nicht veröffentlicht werden: ",
-      "error": "Ein Fehler ist aufgetreten. Bitte versuche es später erneut.",
-      "success": "Beitrag erfolgreich veröffentlicht!",
-      "create": "Veröffentlichen",
-      "creating": "Beitrag wird veröffentlicht..."
-    }
+  "appName": "Loli Forum",
+  "common": {
+    "register": "Registrieren",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "account": "Konto",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "email": "E-Mail",
+    "dashboard": "Übersicht",
+    "settings": "Einstellungen",
+    "profile": "Profil",
+    "languages": "Sprachen"
+  },
+  "navbar": {
+    "greetings": "Hallo, ",
+    "search": "Suche"
+  },
+  "homePage": {
+    "latestPosts": "Neueste Beiträge",
+    "latestPostsDescription": "Entdecke Themen, die dich interessieren.",
+    "loading": "Lade..."
+  },
+  "postsList": {
+    "loadingMorePosts": "Weitere Beiträge werden geladen...",
+    "noPosts": "Zurzeit sind keine Beiträge verfügbar.",
+    "createYourPost": "Erstelle deinen ersten Beitrag",
+    "tryAgain": "Erneut versuchen",
+    "error": "Ein Fehler ist aufgetreten. Bitte versuche es später erneut."
+  },
+  "postCard": {
+    "invalidURL": "Ungültige Bild-URL",
+    "unconfiguredHost": "Nicht vertrauenswürdige Bildquelle",
+    "loadError": "Fehler beim Laden"
+  },
+  "themeSwitch": {
+    "light": "Helles Design",
+    "dark": "Dunkles Design",
+    "system": "Systemstandard",
+    "toggle": "Design wechseln"
+  },
+  "loginForm": {
+    "welcomeBack": "Willkommen zurück!",
+    "loginToContinue": "Bitte melde dich bei deinem Loli Forum-Konto an",
+    "continueWith": "Weiter mit",
+    "termsOfService": "Nutzungsbedingungen",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "byClickingStart": "Mit der Anmeldung akzeptierst du unsere ",
+    "byClickingAnd": "und",
+    "byClickingEnd": "."
+  },
+  "createPostForm": {
+    "cardTitle": "Beitrag erstellen",
+    "cardDescription": "Teile deine Gedanken oder Erlebnisse und mach mit bei der Diskussion!",
+    "title": "Beitragstitel",
+    "titlePlaceholder": "[Frage] Was soll ich tun, um...",
+    "cover": "Titelbild",
+    "optional": "Optional",
+    "coverPlaceholder": "https://fileapi.example.com/uploads/Image.jpg",
+    "coverTooltip": "Du kannst unten ein Bild hochladen und den Link hier einfügen oder eine andere Bild-URL verwenden.",
+    "content": "Beitragsinhalt",
+    "contentPlaceholder": "Gib hier den Inhalt deines Beitrags ein",
+    "selectEmoji": "Emoji auswählen",
+    "breadcrumb1": "Beiträge",
+    "breadcrumb2": "Beitrag erstellen",
+    "mustLogin": "Du musst angemeldet sein, um einen Beitrag zu erstellen.",
+    "failed": "Beitrag konnte nicht veröffentlicht werden: ",
+    "error": "Ein Fehler ist aufgetreten. Bitte versuche es später erneut.",
+    "success": "Beitrag erfolgreich veröffentlicht!",
+    "create": "Veröffentlichen",
+    "creating": "Beitrag wird veröffentlicht...",
+    "emptyTitle": "Titel darf nicht leer sein",
+    "emptyContent": "Inhalt darf nicht leer sein",
+    "closePreview": "Vorschau schließen",
+    "preview": "Vorschau",
+    "previewTitle": "Beitragsvorschau",
+    "previewDescription": "Noch einmal alles gut prüfen!"
+  },
+  "managePostsPage": {
+    "failedToFetch": "Beiträge konnten nicht geladen werden.",
+    "updateSuccess": "Beitrag erfolgreich aktualisiert!",
+    "updateFailed": "Aktualisierung fehlgeschlagen. Bitte versuche es später noch einmal.",
+    "deleteSuccess": "Beitrag erfolgreich gelöscht!",
+    "deleteFailed": "Löschen fehlgeschlagen. Bitte versuche es später noch einmal.",
+    "bulkDeleteSuccess": "Beiträge erfolgreich gelöscht!",
+    "bulkDeleteFailed": "Mehrere Beiträge konnten nicht gelöscht werden. Bitte später erneut versuchen.",
+    "cardTitle": "Beiträge verwalten",
+    "cardDescription": "Hier kannst du deine Beiträge ansehen, bearbeiten oder löschen.",
+    "newPost": "Beitrag erstellen",
+    "searchPosts": "Beiträge durchsuchen...",
+    "deleteSelected": "Ausgewählte löschen",
+    "id": "ID",
+    "title": "Titel",
+    "author": "Autor/in",
+    "created": "Erstellt am",
+    "updated": "Aktualisiert am",
+    "noPosts": "Du hast noch keine Beiträge.",
+    "noPostsFound": "Kein Beitrag mit diesem Titel oder dieser ID gefunden.",
+    "openMenu": "Menü öffnen",
+    "actions": "Aktionen",
+    "view": "Ansehen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "editPost": "Beitrag bearbeiten",
+    "editPostDescription": "Hier kannst du den Inhalt deines Beitrags bearbeiten.",
+    "cover": "Beitragsbild",
+    "coverTooltip": "Du kannst unten ein Bild hochladen und die URL hier einfügen oder eine andere Bild-URL verwenden.",
+    "coverPlaceholder": "https://fileapi.example.com/uploads/Image.jpg",
+    "content": "Beitragsinhalt",
+    "contentPlaceholder": "Gib hier deinen Beitrag ein",
+    "selectEmoji": "Emoji auswählen",
+    "cancel": "Abbrechen",
+    "preview": "Vorschau",
+    "save": "Änderungen speichern",
+    "previewTitle": "Beitragsvorschau",
+    "previewDescription": "Noch einmal alles gut prüfen!",
+    "emptyTitle": "Titel darf nicht leer sein",
+    "emptyContent": "Inhalt darf nicht leer sein",
+    "closePreview": "Vorschau schließen",
+    "comfirmDeletion": "Möchtest du diesen Beitrag wirklich löschen?",
+    "comfirmDeletionStart": "Diesen Beitrag wirklich löschen",
+    "comfirmDeletionEnd": "? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "comfirmBulkDeletion": "Möchtest du diese Beiträge wirklich löschen?",
+    "comfirmBulkDeletionStart": "Diese",
+    "comfirmBulkDeletionEnd": "Beiträge wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "bulkDelete": "Mehrere löschen",
+    "posts": "Beiträge"
   }
-  
+}

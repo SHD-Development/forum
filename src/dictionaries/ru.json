@@ -1,75 +1,130 @@
 {
-    "appName": "Форум Loli",
-    "common": {
-      "register": "Зарегистрироваться",
-      "login": "Войти",
-      "logout": "Выйти",
-      "account": "Аккаунт",
-      "password": "Пароль",
-      "confirmPassword": "Подтвердите пароль",
-      "email": "Электронная почта",
-      "dashboard": "Главная панель",
-      "settings": "Настройки",
-      "profile": "Профиль",
-      "languages": "Языки"
-    },
-    "navbar": {
-      "greetings": "Привет, ",
-      "search": "Поиск"
-    },
-    "homePage": {
-      "latestPosts": "Последние посты",
-      "latestPostsDescription": "Изучайте темы, которые вам интересны.",
-      "loading": "Загрузка..."
-    },
-    "postsList": {
-      "loadingMorePosts": "Загрузка дополнительных постов...",
-      "noPosts": "Пока что нет постов для отображения.",
-      "createYourPost": "Опубликуйте свой первый пост",
-      "tryAgain": "Попробовать снова",
-      "error": "Произошла ошибка. Пожалуйста, попробуйте позже."
-    },
-    "postCard": {
-      "invalidURL": "Недопустимый URL изображения",
-      "unconfiguredHost": "Ненадежный источник изображения",
-      "loadError": "Ошибка при загрузке изображения"
-    },
-    "themeSwitch": {
-      "light": "Светлая тема",
-      "dark": "Темная тема",
-      "system": "Системная тема",
-      "toggle": "Переключить тему"
-    },
-    "loginForm": {
-      "welcomeBack": "С возвращением!",
-      "loginToContinue": "Пожалуйста, войдите в аккаунт Loli Форум",
-      "continueWith": "Продолжить через",
-      "termsOfService": "Условия использования",
-      "privacyPolicy": "Политика конфиденциальности",
-      "byClickingStart": "Вход означает согласие с нашими ",
-      "byClickingAnd": "и",
-      "byClickingEnd": "."
-    },
-    "createPostForm": {
-      "cardTitle": "Создать пост",
-      "cardDescription": "Поделитесь мыслями или опытом и присоединяйтесь к обсуждению!",
-      "title": "Заголовок поста",
-      "titlePlaceholder": "[Вопрос] Что мне нужно сделать, чтобы...",
-      "cover": "Обложка",
-      "optional": "Необязательно",
-      "coverPlaceholder": "https://fileapi.example.com/uploads/Image.jpg",
-      "coverTooltip": "Вы можете загрузить изображение ниже и вставить его ссылку сюда или использовать другой URL.",
-      "content": "Содержимое поста",
-      "contentPlaceholder": "Введите содержимое вашего поста здесь",
-      "selectEmoji": "Выбрать эмодзи",
-      "breadcrumb1": "Посты",
-      "breadcrumb2": "Создать пост",
-      "mustLogin": "Необходимо войти, чтобы создать пост.",
-      "failed": "Не удалось опубликовать пост: ",
-      "error": "Произошла ошибка. Пожалуйста, попробуйте позже.",
-      "success": "Пост успешно опубликован!",
-      "create": "Опубликовать",
-      "creating": "Публикация поста..."
-    }
+  "appName": "Форум Loli",
+  "common": {
+    "register": "Зарегистрироваться",
+    "login": "Войти",
+    "logout": "Выйти",
+    "account": "Аккаунт",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "email": "Электронная почта",
+    "dashboard": "Главная панель",
+    "settings": "Настройки",
+    "profile": "Профиль",
+    "languages": "Языки"
+  },
+  "navbar": {
+    "greetings": "Привет, ",
+    "search": "Поиск"
+  },
+  "homePage": {
+    "latestPosts": "Последние посты",
+    "latestPostsDescription": "Изучайте темы, которые вам интересны.",
+    "loading": "Загрузка..."
+  },
+  "postsList": {
+    "loadingMorePosts": "Загрузка дополнительных постов...",
+    "noPosts": "Пока что нет постов для отображения.",
+    "createYourPost": "Опубликуйте свой первый пост",
+    "tryAgain": "Попробовать снова",
+    "error": "Произошла ошибка. Пожалуйста, попробуйте позже."
+  },
+  "postCard": {
+    "invalidURL": "Недопустимый URL изображения",
+    "unconfiguredHost": "Ненадежный источник изображения",
+    "loadError": "Ошибка при загрузке изображения"
+  },
+  "themeSwitch": {
+    "light": "Светлая тема",
+    "dark": "Темная тема",
+    "system": "Системная тема",
+    "toggle": "Переключить тему"
+  },
+  "loginForm": {
+    "welcomeBack": "С возвращением!",
+    "loginToContinue": "Пожалуйста, войдите в аккаунт Loli Форум",
+    "continueWith": "Продолжить через",
+    "termsOfService": "Условия использования",
+    "privacyPolicy": "Политика конфиденциальности",
+    "byClickingStart": "Вход означает согласие с нашими ",
+    "byClickingAnd": "и",
+    "byClickingEnd": "."
+  },
+  "createPostForm": {
+    "cardTitle": "Создать пост",
+    "cardDescription": "Поделитесь мыслями или опытом и присоединяйтесь к обсуждению!",
+    "title": "Заголовок поста",
+    "titlePlaceholder": "[Вопрос] Что мне нужно сделать, чтобы...",
+    "cover": "Обложка",
+    "optional": "Необязательно",
+    "coverPlaceholder": "https://fileapi.example.com/uploads/Image.jpg",
+    "coverTooltip": "Вы можете загрузить изображение ниже и вставить его ссылку сюда или использовать другой URL.",
+    "content": "Содержимое поста",
+    "contentPlaceholder": "Введите содержимое вашего поста здесь",
+    "selectEmoji": "Выбрать эмодзи",
+    "breadcrumb1": "Посты",
+    "breadcrumb2": "Создать пост",
+    "mustLogin": "Необходимо войти, чтобы создать пост.",
+    "failed": "Не удалось опубликовать пост: ",
+    "error": "Произошла ошибка. Пожалуйста, попробуйте позже.",
+    "success": "Пост успешно опубликован!",
+    "create": "Опубликовать",
+    "creating": "Публикация поста...",
+    "emptyTitle": "Заголовок не указан",
+    "emptyContent": "Содержание не указано",
+    "closePreview": "Закрыть предварительный просмотр",
+    "preview": "Предпросмотр",
+    "previewTitle": "Предпросмотр статьи",
+    "previewDescription": "Проверьте всё ещё раз!"
+  },
+  "managePostsPage": {
+    "failedToFetch": "Не удалось получить список статей.",
+    "updateSuccess": "Статья успешно обновлена!",
+    "updateFailed": "Не удалось обновить статью. Попробуйте позже.",
+    "deleteSuccess": "Статья успешно удалена!",
+    "deleteFailed": "Не удалось удалить статью. Попробуйте позже.",
+    "bulkDeleteSuccess": "Статьи успешно удалены!",
+    "bulkDeleteFailed": "Не удалось удалить статьи. Попробуйте позже.",
+    "cardTitle": "Управление статьями",
+    "cardDescription": "Здесь вы можете просматривать, редактировать или удалять свои статьи.",
+    "newPost": "Опубликовать статью",
+    "searchPosts": "Поиск статьи...",
+    "deleteSelected": "Удалить выбранные статьи",
+    "id": "ID",
+    "title": "Заголовок",
+    "author": "Автор",
+    "created": "Создано",
+    "updated": "Обновлено",
+    "noPosts": "У вас ещё нет статей.",
+    "noPostsFound": "Статьи с таким заголовком или ID не найдены.",
+    "openMenu": "Открыть меню",
+    "actions": "Действия",
+    "view": "Просмотр",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "editPost": "Редактирование статьи",
+    "editPostDescription": "Здесь вы можете изменить содержимое статьи.",
+    "cover": "Обложка статьи",
+    "coverTooltip": "Вы можете загрузить изображение через кнопку ниже и вставить ссылку сюда, или использовать ссылку на другое изображение.",
+    "coverPlaceholder": "https://fileapi.example.com/uploads/Image.jpg",
+    "content": "Содержание статьи",
+    "contentPlaceholder": "Введите содержимое вашей статьи здесь",
+    "selectEmoji": "Выбрать эмодзи",
+    "cancel": "Отмена",
+    "preview": "Предпросмотр",
+    "save": "Сохранить изменения",
+    "previewTitle": "Предпросмотр статьи",
+    "previewDescription": "Проверьте всё ещё раз!",
+    "emptyTitle": "Заголовок не указан",
+    "emptyContent": "Содержание не указано",
+    "closePreview": "Закрыть предварительный просмотр",
+    "comfirmDeletion": "Вы уверены, что хотите удалить эту статью?",
+    "comfirmDeletionStart": "Удалить",
+    "comfirmDeletionEnd": "? Это действие нельзя отменить.",
+    "comfirmBulkDeletion": "Вы уверены, что хотите удалить выбранные статьи?",
+    "comfirmBulkDeletionStart": "Удалить",
+    "comfirmBulkDeletionEnd": "статей? Это действие нельзя отменить.",
+    "bulkDelete": "Массовое удаление",
+    "posts": "статей"
   }
-  
+}
