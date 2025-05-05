@@ -10,8 +10,11 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get("limit") || "16");
     const page = parseInt(searchParams.get("page") || "1");
     const skip = (page - 1) * limit;
+    const authorId = searchParams.get("author");
+    const where = authorId ? { authorId: authorId } : {};
 
     const posts = await prisma.post.findMany({
+      where,
       take: limit,
       skip,
       orderBy: {
@@ -33,7 +36,9 @@ export async function GET(request: NextRequest) {
       updatedAt: post.updatedAt.toISOString(),
     }));
 
-    const totalPosts = await prisma.post.count();
+    const totalPosts = await prisma.post.count({
+      where,
+    });
 
     return NextResponse.json({
       posts: formattedPosts,

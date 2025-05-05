@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, JSX } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import axios from "axios";
 import {
   Table,
@@ -68,6 +68,7 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { TiptapHTMLRenderer } from "@/components/tiptap-renderer";
 import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
 interface Author {
   id?: string;
   name: string;
@@ -98,6 +99,7 @@ interface PostsResponse {
 }
 
 export default function PostsManagePage() {
+  const { data: session } = useSession();
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedPosts, setSelectedPosts] = useState<number[]>([]);
@@ -130,9 +132,13 @@ export default function PostsManagePage() {
   const t = useTranslations("managePostsPage");
   const fetchPosts = async (page = 1) => {
     try {
+      if (!session?.user) {
+        return redirect("/auth/login");
+      }
+
       setLoading(true);
       const response = await axios.get(
-        `/api/post?page=${page}&limit=${postsPerPage}`
+        `/api/post?page=${page}&limit=${postsPerPage}&author=${session.user.id}`
       );
       const data: PostsResponse = response.data;
       setPosts(data.posts);
@@ -147,8 +153,10 @@ export default function PostsManagePage() {
   };
 
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    if (session?.user?.id) {
+      fetchPosts();
+    }
+  }, [session]);
 
   useEffect(() => {
     const handleOpenEmojiPicker = (e: Event) => {
