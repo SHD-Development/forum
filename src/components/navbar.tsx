@@ -66,25 +66,12 @@ const Navbar = ({ session }: Props) => {
         <div className="flex items-center gap-2 md:gap-6">
           <Cloud className="text-black dark:text-white" size={32} />
           <p className="font-bold text-black dark:text-white">{t("appName")}</p>
-          <div className="relative hidden md:block">
-            <Search className="h-5 w-5 absolute inset-y-0 my-auto left-2.5" />
-            <Input
-              className="pl-10 flex-1 bg-slate-100/70 dark:bg-slate-800 border-none shadow-none w-[280px] rounded-full"
-              placeholder={t("navbar.search")}
-            />
-          </div>
         </div>
 
         <div className="flex items-center gap-2">
           <div className="hidden lg:flex">
             <LanguageSwitcher />
           </div>
-          <Button
-            size="icon"
-            className="bg-muted text-foreground hover:bg-accent shadow-none rounded-full md:hidden"
-          >
-            <Search className="!h-5 !w-5" />
-          </Button>
           {session ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -130,7 +117,9 @@ const Navbar = ({ session }: Props) => {
             </a>
           )}
 
-          <ModeToggle />
+          <div className="hidden md:flex">
+            <ModeToggle />
+          </div>
           <Button
             variant="secondary"
             className="md:hidden border-white/50 border-2"
@@ -145,14 +134,6 @@ const Navbar = ({ session }: Props) => {
                 <DialogTitle>{t("appName")}</DialogTitle>
               </DialogHeader>
               <div className="flex flex-col space-y-4 p-2">
-                <div className="relative">
-                  <Search className="h-5 w-5 absolute inset-y-0 my-auto left-2.5" />
-                  <Input
-                    className="pl-10 flex-1 bg-slate-100/70 dark:bg-slate-800 border-none shadow-none rounded-full"
-                    placeholder={t("navbar.search")}
-                  />
-                </div>
-
                 <div className="py-2">
                   <p className="text-sm font-medium mb-2">
                     {t("common.languages")} & {t("common.themes")}
