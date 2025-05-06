@@ -25,12 +25,19 @@ import {
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 type Props = {
   session: Session | null;
 };
 const Navbar = ({ session }: Props) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = useTranslations();
   useEffect(() => {
     const handleScroll = () => {
@@ -127,9 +134,79 @@ const Navbar = ({ session }: Props) => {
           <Button
             variant="secondary"
             className="md:hidden border-white/50 border-2"
+            onClick={() => setMobileMenuOpen(true)}
           >
             <Menu />
           </Button>
+
+          <Dialog open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <DialogContent className="sm:max-w-md">
+              <DialogHeader>
+                <DialogTitle>{t("appName")}</DialogTitle>
+              </DialogHeader>
+              <div className="flex flex-col space-y-4 p-2">
+                <div className="relative">
+                  <Search className="h-5 w-5 absolute inset-y-0 my-auto left-2.5" />
+                  <Input
+                    className="pl-10 flex-1 bg-slate-100/70 dark:bg-slate-800 border-none shadow-none rounded-full"
+                    placeholder={t("navbar.search")}
+                  />
+                </div>
+
+                <div className="py-2">
+                  <p className="text-sm font-medium mb-2">
+                    {t("common.languages")} & {t("common.themes")}
+                  </p>
+                  <div className="flex flex-row">
+                    <LanguageSwitcher />
+                    <div className="mx-1" />
+                    <ModeToggle />
+                  </div>
+                </div>
+
+                <div className="py-2">
+                  <p className="text-sm font-medium mb-2">
+                    {t("common.account")}
+                  </p>
+                  {session ? (
+                    <div className="space-y-2">
+                      <div className="text-lg bg-zinc-300 dark:bg-zinc-900 p-3 rounded-lg">
+                        {t("navbar.greetings")} {session.user?.name}
+                      </div>
+                      <Link
+                        href="/dashboard"
+                        className="flex items-center gap-2 p-2 hover:bg-accent rounded-md"
+                      >
+                        <CircleGauge size={18} />
+                        <span>{t("common.dashboard")}</span>
+                      </Link>
+                      <Link
+                        href="/profile"
+                        className="flex items-center gap-2 p-2 hover:bg-accent rounded-md"
+                      >
+                        <CircleUser size={18} />
+                        <span>{t("common.profile")}</span>
+                      </Link>
+                      <Link
+                        href="/auth/logout"
+                        className="flex items-center gap-2 p-2 hover:bg-accent rounded-md"
+                      >
+                        <LogOut size={18} />
+                        <span>{t("common.logout")}</span>
+                      </Link>
+                    </div>
+                  ) : (
+                    <Link href="/auth/login">
+                      <Button className="w-full">
+                        <LogIn className="mr-2" size={18} />
+                        {t("common.login")}
+                      </Button>
+                    </Link>
+                  )}
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </nav>
