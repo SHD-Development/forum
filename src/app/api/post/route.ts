@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     const authorId = searchParams.get("author");
     const searchQuery = searchParams.get("search");
 
-    let where: any = {};
+    const where: any = {};
 
     if (authorId) {
       where.authorId = authorId;
