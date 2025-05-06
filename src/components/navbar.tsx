@@ -1,6 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { ModeToggle } from "./theme-switcher";
 import { useEffect, useState } from "react";
@@ -31,6 +30,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { SearchDialog } from "./search-dialog";
 
 type Props = {
   session: Session | null;
@@ -38,7 +38,19 @@ type Props = {
 const Navbar = ({ session }: Props) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchDialogOpen, setSearchDialogOpen] = useState(false);
   const t = useTranslations();
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setSearchDialogOpen((open) => !open);
+      }
+    };
+
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -66,6 +78,19 @@ const Navbar = ({ session }: Props) => {
         <div className="flex items-center gap-2 md:gap-6">
           <Cloud className="text-black dark:text-white" size={32} />
           <p className="font-bold text-black dark:text-white">{t("appName")}</p>
+          <Button
+            variant="outline"
+            onClick={() => setSearchDialogOpen(true)}
+            className="rounded-full md:rounded-lg"
+          >
+            <Search />
+            <div className="hidden md:flex gap-1">
+              {t("navbar.search")}
+              <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <span className="text-xs">⌘</span>K
+              </kbd>
+            </div>
+          </Button>
         </div>
 
         <div className="flex items-center gap-2">
@@ -188,6 +213,12 @@ const Navbar = ({ session }: Props) => {
               </div>
             </DialogContent>
           </Dialog>
+
+          {/* Search Dialog */}
+          <SearchDialog
+            open={searchDialogOpen}
+            onOpenChange={setSearchDialogOpen}
+          />
         </div>
       </div>
     </nav>

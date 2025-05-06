@@ -11,7 +11,31 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get("page") || "1");
     const skip = (page - 1) * limit;
     const authorId = searchParams.get("author");
-    const where = authorId ? { authorId: authorId } : {};
+    const searchQuery = searchParams.get("search");
+
+    let where: any = {};
+
+    if (authorId) {
+      where.authorId = authorId;
+    }
+
+    if (searchQuery) {
+      where.OR = [
+        { title: { contains: searchQuery, mode: "insensitive" } },
+        {
+          content: {
+            array_contains: [
+              {
+                type: "paragraph",
+                children: [
+                  { text: { contains: searchQuery, mode: "insensitive" } },
+                ],
+              },
+            ],
+          },
+        },
+      ];
+    }
 
     const posts = await prisma.post.findMany({
       where,

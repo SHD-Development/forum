@@ -18,6 +18,12 @@
     "greetings": "你好，",
     "search": "搜尋"
   },
+  "search": {
+    "placeholder": "搜尋文章...",
+    "noResults": "找不到任何結果。",
+    "posts": "文章",
+    "atleastTwo": "輸入至少兩個字元以開始搜尋。"
+  },
   "homePage": {
     "latestPosts": "最新文章",
     "latestPostsDescription": "尋找你所感興趣的主題。",
