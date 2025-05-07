@@ -34,6 +34,10 @@ import {
 import toast from "react-hot-toast";
 import appConfig from "@/config";
 import Link from "next/link";
+import { CommentForm } from "@/components/comment-form";
+import { CommentList } from "@/components/comment-list";
+import { Separator } from "@/components/ui/separator";
+
 function isValidUrl(url: string | null | undefined): boolean {
   if (!url) return false;
   try {
@@ -79,6 +83,7 @@ export default function PostDetailPage() {
   const [coverImageStatus, setCoverImageStatus] = useState<
     "loading" | "loaded" | "error"
   >("loading");
+  const [commentRefresh, setCommentRefresh] = useState(0);
 
   const shareLink = () => {
     navigator.clipboard.writeText(`${window.location.origin}/post/${postId}`);
@@ -385,11 +390,15 @@ export default function PostDetailPage() {
 
         <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 mt-6 p-6 shadow-xl">
           <h2 className="text-xl font-bold mb-4">Comments</h2>
-          <div className="space-y-4">
-            {/* Todo: Comment component */}
-            <p className="text-gray-600 dark:text-gray-400 text-center py-8">
-              Be the first?
-            </p>
+          <div className="space-y-6">
+            <CommentForm
+              postId={postId}
+              onCommentAdded={() => setCommentRefresh((prev) => prev + 1)}
+            />
+            <Separator />
+            <div className="mt-8">
+              <CommentList postId={postId} refreshTrigger={commentRefresh} />
+            </div>
           </div>
         </Card>
       </div>
