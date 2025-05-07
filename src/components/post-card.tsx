@@ -109,7 +109,7 @@ export function PostCard({ post }: PostCardProps) {
       href={`/post/${post.id}`}
       className="block hover:opacity-90 hover:scale-105 transition-all duration-200"
     >
-      <Card className="overflow-hidden h-full flex flex-col shadow-lg shadow-black/50 hover:ring-5 ring-sky-400/75 dark:ring-white/30 transition-all duration-300 hover:delay-1000">
+      <Card className="overflow-hidden h-full flex flex-col shadow-lg shadow-black/50 hover:ring-5 ring-sky-400/75 dark:ring-white/30 transition-all duration-300 hover:delay-500">
         <div className="relative aspect-video w-full bg-muted">
           {post.cover === null ? (
             <Image

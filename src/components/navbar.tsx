@@ -81,7 +81,7 @@ const Navbar = ({ session }: Props) => {
           <Button
             variant="outline"
             onClick={() => setSearchDialogOpen(true)}
-            className="rounded-full md:rounded-lg"
+            className="hidden md:flex md:rounded-lg"
           >
             <Search />
             <div className="hidden md:flex gap-1">
@@ -161,6 +161,22 @@ const Navbar = ({ session }: Props) => {
               <div className="flex flex-col space-y-4 p-2">
                 <div className="py-2">
                   <p className="text-sm font-medium mb-2">
+                    {t("navbar.search")}
+                  </p>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setSearchDialogOpen(true);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="rounded-lg w-full"
+                  >
+                    <Search />
+                    {t("navbar.search")}
+                  </Button>
+                </div>
+                <div className="py-2">
+                  <p className="text-sm font-medium mb-2">
                     {t("common.languages")} & {t("common.themes")}
                   </p>
                   <div className="flex flex-row">
@@ -176,7 +192,7 @@ const Navbar = ({ session }: Props) => {
                   </p>
                   {session ? (
                     <div className="space-y-2">
-                      <div className="text-lg bg-zinc-300 dark:bg-zinc-900 p-3 rounded-lg">
+                      <div className="text-lg bg-zinc-200 dark:bg-zinc-900 p-3 rounded-lg">
                         {t("navbar.greetings")} {session.user?.name}
                       </div>
                       <Link

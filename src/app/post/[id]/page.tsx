@@ -369,18 +369,14 @@ export default function PostDetailPage() {
               </div>
               {post.author.id === session?.user?.id && (
                 <div className="flex space-x-2 ml-3">
-                  <Button
-                    variant="outline"
-                    className="border-blue-600 text-blue-600 hover:bg-blue-600/10 dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-500/10"
-                  >
-                    Edit Post
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="border-red-600 text-red-600 hover:bg-red-600/10 dark:border-red-500 dark:text-red-500 dark:hover:bg-red-500/10"
-                  >
-                    Delete Post
-                  </Button>
+                  <Link href={`/dashboard/post/manage`}>
+                    <Button
+                      variant="outline"
+                      className="border-blue-600 text-blue-600 hover:bg-blue-600/10 dark:border-blue-500 dark:text-blue-500 dark:hover:bg-blue-500/10"
+                    >
+                      Manage
+                    </Button>
+                  </Link>
                 </div>
               )}
             </div>

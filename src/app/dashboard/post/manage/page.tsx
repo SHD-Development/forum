@@ -331,8 +331,12 @@ export default function PostsManagePage() {
               <CardTitle className="text-2xl">{t("cardTitle")}</CardTitle>
               <CardDescription>{t("cardDescription")}</CardDescription>
             </div>
-            <Button onClick={() => router.push("/dashboard/post/create")}>
-              <Plus className="mr-2 h-4 w-4" /> {t("newPost")}
+            <Button
+              onClick={() => router.push("/dashboard/post/create")}
+              className="ml-0.5 md:ml-0"
+            >
+              <Plus className="md:mr-2 h-4 w-4" />
+              <p className="hidden md:inline">{t("newPost")}</p>
             </Button>
           </div>
         </CardHeader>
