@@ -26,6 +26,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import { Badge } from "@/components/ui/badge";
 
 interface Author {
   id: string;
@@ -39,6 +40,7 @@ interface Comment {
   author: Author;
   createdAt: string;
   updatedAt: string;
+  isEdited?: boolean;
 }
 
 interface CommentListProps {
@@ -76,10 +78,17 @@ export function CommentList({ postId, refreshTrigger = 0 }: CommentListProps) {
 
       const data = response.data;
 
+      const commentsWithEditInfo = data.comments.map((comment: Comment) => ({
+        ...comment,
+        isEdited:
+          new Date(comment.updatedAt).getTime() >
+          new Date(comment.createdAt).getTime(),
+      }));
+
       if (append) {
-        setComments((prev) => [...prev, ...data.comments]);
+        setComments((prev) => [...prev, ...commentsWithEditInfo]);
       } else {
-        setComments(data.comments);
+        setComments(commentsWithEditInfo);
       }
 
       setHasMore(pageNum < data.pagination.pages);
@@ -123,7 +132,12 @@ export function CommentList({ postId, refreshTrigger = 0 }: CommentListProps) {
         content: editContent,
       });
 
-      const updatedComment = response.data;
+      const updatedComment = {
+        ...response.data,
+        isEdited:
+          new Date(response.data.updatedAt).getTime() >
+          new Date(response.data.createdAt).getTime(),
+      };
 
       setComments((comments) =>
         comments.map((comment) =>
@@ -230,6 +244,11 @@ export function CommentList({ postId, refreshTrigger = 0 }: CommentListProps) {
                     addSuffix: true,
                   })}
                 </span>
+                {comment.isEdited && (
+                  <Badge variant="outline" className="text-xs py-0 h-5">
+                    Edited
+                  </Badge>
+                )}
               </div>
 
               {session?.user?.id === comment.author.id && (
