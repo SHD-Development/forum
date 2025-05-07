@@ -11,11 +11,18 @@
     "dashboard": "Panel de control",
     "settings": "Configuración",
     "profile": "Perfil",
-    "languages": "Idiomas"
+    "languages": "Idiomas",
+    "themes": "主題"
   },
   "navbar": {
     "greetings": "¡Hola,",
     "search": "Buscar"
+  },
+  "search": {
+    "placeholder": "搜尋文章...",
+    "noResults": "找不到任何結果。",
+    "posts": "文章",
+    "atleastTwo": "輸入至少兩個字元以開始搜尋。"
   },
   "homePage": {
     "latestPosts": "Últimas publicaciones",
@@ -126,5 +133,36 @@
     "comfirmBulkDeletionEnd": "artículos? Esta acción no se puede deshacer.",
     "bulkDelete": "Eliminar múltiples",
     "posts": "artículos"
+  },
+  "comments": {
+    "failedToFetch": "無法獲取留言。",
+    "editSuccess": "成功更新留言！",
+    "editFailed": "留言更新失敗，請稍後再試。",
+    "deleteSuccess": "成功刪除留言！",
+    "deleteFailed": "留言刪除失敗，請稍後再試。",
+    "tryAgain": "重試",
+    "beTheFirst": "成為第一個？",
+    "edit": "編輯",
+    "delete": "刪除",
+    "loadMore": "載入更多",
+    "loading": "載入中...",
+    "editComment": "編輯留言",
+    "editCommentDescription": "在這裡你可以編輯你的留言內容。",
+    "editCommentPlaceholder": "在這裡輸入你的留言內容",
+    "cancel": "取消",
+    "save": "保存更改",
+    "saving": "正在保存...",
+    "deleteComment": "刪除留言",
+    "deleteCommentDescription": "你確定要刪除這條留言嗎？",
+    "deleting": "正在刪除...",
+    "pleaseLogin": "請登入以發表留言",
+    "empty": "留言內容為空",
+    "commentSuccess": "留言成功！",
+    "commentFailed": "留言失敗，請稍後再試。",
+    "loginToComment": "登入以參與討論",
+    "login": "登入",
+    "commentPlaceholder": "在這裡輸入你的留言內容",
+    "posting": "正在發表留言...",
+    "post": "發表"
   }
 }
