@@ -8,7 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-
+import axios from "axios";
+import { useTranslations } from "next-intl";
 interface CommentFormProps {
   postId: string | number;
   onCommentAdded?: () => void;
@@ -19,46 +20,36 @@ export function CommentForm({ postId, onCommentAdded }: CommentFormProps) {
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-
+  const t = useTranslations("comments");
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!session) {
-      toast.error("Please sign in to comment");
+      toast.error(t("pleaseLogin"));
       return;
     }
 
     if (!content.trim()) {
-      toast.error("Comment cannot be empty");
+      toast.error(t("empty"));
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/comment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          postId,
-          content: content.trim(),
-        }),
+      await axios.post("/api/comment", {
+        postId,
+        content: content.trim(),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to post comment");
-      }
-
       setContent("");
-      toast.success("Comment posted successfully");
+      toast.success(t("commentSuccess"));
       if (onCommentAdded) {
         onCommentAdded();
       }
     } catch (error) {
       console.error("Error posting comment:", error);
-      toast.error("Failed to post comment");
+      toast.error(t("commentFailed"));
     } finally {
       setIsSubmitting(false);
     }
@@ -68,10 +59,10 @@ export function CommentForm({ postId, onCommentAdded }: CommentFormProps) {
     return (
       <div className="flex flex-col items-center justify-center p-6 border border-dashed rounded-lg border-gray-300 dark:border-gray-700">
         <p className="mb-4 text-gray-600 dark:text-gray-400">
-          Sign in to join the conversation
+          {t("loginToComment")}
         </p>
         <Button onClick={() => router.push("/auth/login")} variant="outline">
-          Sign In
+          {t("login")}
         </Button>
       </div>
     );
@@ -88,7 +79,7 @@ export function CommentForm({ postId, onCommentAdded }: CommentFormProps) {
         </Avatar>
 
         <Textarea
-          placeholder="Add a comment..."
+          placeholder={t("commentPlaceholder")}
           value={content}
           onChange={(e) => setContent(e.target.value)}
           className="flex-1 min-h-[80px] resize-y"
@@ -100,10 +91,10 @@ export function CommentForm({ postId, onCommentAdded }: CommentFormProps) {
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Posting...
+              {t("posting")}
             </>
           ) : (
-            "Post Comment"
+            t("post")
           )}
         </Button>
       </div>
