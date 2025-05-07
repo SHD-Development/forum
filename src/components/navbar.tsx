@@ -116,30 +116,30 @@ const Navbar = ({ session }: Props) => {
                   <CircleUser />
                   {t("common.profile")}
                 </DropdownMenuItem>
-                <a href="/dashboard">
+                <Link href="/dashboard">
                   <DropdownMenuItem>
                     <CircleGauge />
                     {t("common.dashboard")}
                   </DropdownMenuItem>
-                </a>
+                </Link>
                 <DropdownMenuSeparator />
-                <a href="/auth/logout">
+                <Link href="/auth/logout" prefetch={false}>
                   <DropdownMenuItem>
                     <LogOut />
                     {t("common.logout")}
                   </DropdownMenuItem>
-                </a>
+                </Link>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <a href="/auth/login">
+            <Link href="/auth/login">
               <Button
                 variant="outline"
                 className="hidden sm:inline-flex rounded-full"
               >
                 {t("common.login")}
               </Button>
-            </a>
+            </Link>
           )}
 
           <div className="hidden md:flex">
@@ -196,6 +196,7 @@ const Navbar = ({ session }: Props) => {
                       <Link
                         href="/auth/logout"
                         className="flex items-center gap-2 p-2 hover:bg-accent rounded-md"
+                        prefetch={false}
                       >
                         <LogOut size={18} />
                         <span>{t("common.logout")}</span>

@@ -141,12 +141,12 @@ export function PostsList({ initialLimit, session }: PostsListProps) {
           <div className="col-span-full text-center py-12 bg-zinc-900/90 rounded-lg">
             <p className="text-lg text-muted-foreground">{t("noPosts")}</p>
             {session && (
-              <a
+              <Link
                 href="/dashboard/post/create"
                 className="mt-4 inline-block underline"
               >
                 {t("createYourPost")}
-              </a>
+              </Link>
             )}
           </div>
         )}

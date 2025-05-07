@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { signIn } from "@/auth";
 import { FaGoogle, FaDiscord } from "react-icons/fa6";
 import { getTranslations } from "next-intl/server";
+import Link from "next/link";
 export async function LoginForm({
   className,
   ...props
@@ -69,8 +70,8 @@ export async function LoginForm({
         </CardContent>
       </Card>
       <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        {t("byClickingStart")} <a href="#">{t("termsOfService")}</a>{" "}
-        {t("byClickingAnd")} <a href="#">{t("privacyPolicy")}</a>{" "}
+        {t("byClickingStart")} <Link href="#">{t("termsOfService")}</Link>{" "}
+        {t("byClickingAnd")} <Link href="#">{t("privacyPolicy")}</Link>{" "}
         {t("byClickingEnd")}
       </div>
     </div>

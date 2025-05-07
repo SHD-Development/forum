@@ -69,6 +69,7 @@ import Picker from "@emoji-mart/react";
 import { TiptapHTMLRenderer } from "@/components/tiptap-renderer";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 interface Author {
   id?: string;
   name: string;
@@ -444,12 +445,12 @@ export default function PostsManagePage() {
                                     {t("actions")}
                                   </p>
                                 </DropdownMenuLabel>
-                                <a href={`/post/${post.id}`}>
+                                <Link href={`/post/${post.id}`}>
                                   <DropdownMenuItem>
                                     <Eye className="mr-2 h-4 w-4" />
                                     {t("view")}
                                   </DropdownMenuItem>
-                                </a>
+                                </Link>
                                 <DropdownMenuItem
                                   onClick={() => handleOpenEditDialog(post)}
                                 >

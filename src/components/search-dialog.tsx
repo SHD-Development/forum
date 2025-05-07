@@ -117,8 +117,8 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
   }, [searchQuery, open, initialDataLoaded]);
 
   const handleSelectPost = (postId: string) => {
-    redirect(`/post/${postId}`);
-    // onOpenChange(false);
+    router.push(`/post/${postId}`);
+    onOpenChange(false);
   };
 
   const handleClearSearch = () => {

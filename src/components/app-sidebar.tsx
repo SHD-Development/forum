@@ -190,12 +190,12 @@ export function AppSidebar({ session, ...props }: AppSidebarProps) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Platform</SidebarGroupLabel>
-          <a href="/dashboard">
+          <Link href="/dashboard">
             <SidebarMenuButton>
               <CircleGauge />
               Dashboard
             </SidebarMenuButton>
-          </a>
+          </Link>
         </SidebarGroup>
         <NavMain items={data.navMain} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
