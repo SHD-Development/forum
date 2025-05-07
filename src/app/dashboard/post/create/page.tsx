@@ -14,7 +14,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 import toast from "react-hot-toast";
 import axios from "axios";
 import {
@@ -59,7 +59,7 @@ export default function CreatePostPage() {
     setIsPreviewDialogOpen(true);
   };
   const editorRef = useRef<Editor | null>(null);
-  const router = useRouter();
+  const router = useTransitionRouter();
   const t = useTranslations("createPostForm");
   useEffect(() => {
     const handleOpenEmojiPicker = (e: Event) => {

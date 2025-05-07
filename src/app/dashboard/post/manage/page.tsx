@@ -69,7 +69,8 @@ import Picker from "@emoji-mart/react";
 import { TiptapHTMLRenderer } from "@/components/tiptap-renderer";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
+import { useTransitionRouter } from "next-view-transitions";
 interface Author {
   id?: string;
   name: string;
@@ -129,7 +130,7 @@ export default function PostsManagePage() {
   >("title");
   const editorRef = useRef<Editor | null>(null);
   const postsPerPage = 10;
-  const router = useRouter();
+  const router = useTransitionRouter();
   const t = useTranslations("managePostsPage");
   const fetchPosts = async (page = 1) => {
     try {

@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useTranslations } from "next-intl";
@@ -19,7 +19,7 @@ export function CommentForm({ postId, onCommentAdded }: CommentFormProps) {
   const { data: session } = useSession();
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const router = useRouter();
+  const router = useTransitionRouter();
   const t = useTranslations("comments");
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

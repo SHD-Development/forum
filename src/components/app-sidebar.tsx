@@ -14,7 +14,7 @@ import {
   Cloud,
   CircleGauge,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";

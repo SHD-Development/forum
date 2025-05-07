@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 import { useEffect, useState } from "react";
 import { getCookie, setCookie } from "cookies-next";
 import {
@@ -25,7 +25,7 @@ import {
 } from "country-flag-icons/react/3x2";
 export const LanguageSwitcher = () => {
   const [locale, setLocale] = useState<string>("");
-  const router = useRouter();
+  const router = useTransitionRouter();
   useEffect(() => {
     const cookieLocale = getCookie("NEXT_LOCALE");
     if (cookieLocale) {

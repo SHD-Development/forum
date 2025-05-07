@@ -30,7 +30,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import ThemeSwitch from "@/components/theme-switch";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 export function NavUser({ user }: { user: any }) {
   const { isMobile } = useSidebar();
   const t = useTranslations();

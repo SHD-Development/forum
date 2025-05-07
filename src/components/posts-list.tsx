@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react";
 import { User } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 type Post = {
   id: string;
   title: string;

@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import {
   Dialog,
   DialogContent,

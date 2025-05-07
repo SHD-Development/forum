@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { signIn } from "@/auth";
 import { FaGoogle, FaDiscord } from "react-icons/fa6";
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 export async function LoginForm({
   className,
   ...props

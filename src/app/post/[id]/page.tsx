@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/tooltip";
 import toast from "react-hot-toast";
 import appConfig from "@/config";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { CommentForm } from "@/components/comment-form";
 import { CommentList } from "@/components/comment-list";
 import { Separator } from "@/components/ui/separator";

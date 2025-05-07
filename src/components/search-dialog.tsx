@@ -12,7 +12,7 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-
+import { useTransitionRouter } from "next-view-transitions";
 type Post = {
   id: string;
   title: string;
@@ -35,7 +35,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
+  const router = useTransitionRouter();
   const t = useTranslations();
 
   useEffect(() => {
