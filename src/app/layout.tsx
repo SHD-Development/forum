@@ -17,7 +17,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "react-hot-toast";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
 // import { unstable_ViewTransition as ViewTransition } from "react";
 import { ViewTransitions } from "next-view-transitions";
 
@@ -62,6 +62,7 @@ export default async function RootLayout({
               </SessionProvider>
             </ThemeProvider>
           </NextIntlClientProvider>
+          <SpeedInsights />
         </body>
       </html>
     </ViewTransitions>

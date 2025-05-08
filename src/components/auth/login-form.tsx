@@ -7,6 +7,7 @@ import { signIn } from "@/auth";
 import { FaGoogle, FaDiscord } from "react-icons/fa6";
 import { getTranslations } from "next-intl/server";
 import { Link } from "next-view-transitions";
+import Image from "next/image";
 export async function LoginForm({
   className,
   ...props
@@ -61,9 +62,10 @@ export async function LoginForm({
             </div>
           </div>
           <div className="bg-muted relative hidden md:block">
-            <img
-              src="/images/amamiya.jpg"
+            <Image
+              src="/images/amamiya.webp"
               alt="Image"
+              fill
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.7]"
             />
           </div>

@@ -9,7 +9,7 @@ export default async function Home() {
   const t = await getTranslations("homePage");
 
   return (
-    <div className="min-h-screen w-full bg-center bg-cover bg-fixed bg-[url(/images/bg/home.jpg)]">
+    <div className="min-h-screen w-full bg-center bg-cover bg-fixed bg-[url(/images/bg/home.webp)]">
       <Navbar session={session} />
       <div className="backdrop-blur-sm py-30 min-h-screen dark:backdrop-brightness-50">
         <section className="container mx-auto px-4 py-12 space-y-6">
