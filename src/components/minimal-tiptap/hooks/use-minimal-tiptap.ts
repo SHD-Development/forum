@@ -17,6 +17,7 @@ import {
   UnsetAllMarks,
   ResetMarksOnEnter,
   FileHandler,
+  CustomTextAlign,
 } from "../extensions";
 import { cn } from "@/lib/utils";
 import { fileToBase64, getOutput, randomId } from "../utils";
@@ -159,6 +160,7 @@ const createExtensions = (placeholder: string) => [
   HorizontalRule,
   ResetMarksOnEnter,
   CodeBlockLowlight,
+  CustomTextAlign,
   Placeholder.configure({ placeholder: () => placeholder }),
 ];
 

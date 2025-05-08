@@ -6,6 +6,7 @@ import Image from "@tiptap/extension-image";
 import Underline from "@tiptap/extension-underline";
 import TextStyle from "@tiptap/extension-text-style";
 import Color from "@tiptap/extension-color";
+import TextAlign from "@tiptap/extension-text-align";
 interface TiptapHTMLRendererProps {
   content: any;
   className?: string;
@@ -28,6 +29,11 @@ export function TiptapHTMLRenderer({
         TextStyle.configure({ mergeNestedSpanStyles: true }),
         Color.configure({
           types: ["textStyle"],
+        }),
+        TextAlign.configure({
+          types: ["heading", "paragraph"],
+          alignments: ["left", "center", "right", "justify"],
+          defaultAlignment: "left",
         }),
       ]);
     } catch (e) {

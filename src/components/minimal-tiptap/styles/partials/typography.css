@@ -37,3 +37,34 @@
 .minimal-tiptap-editor .ProseMirror a.link:hover {
   @apply underline;
 }
+
+/* Text alignment styles */
+.minimal-tiptap-editor .ProseMirror p[style*="text-align: center"],
+.minimal-tiptap-editor .ProseMirror h1[style*="text-align: center"],
+.minimal-tiptap-editor .ProseMirror h2[style*="text-align: center"],
+.minimal-tiptap-editor .ProseMirror h3[style*="text-align: center"],
+.minimal-tiptap-editor .ProseMirror h4[style*="text-align: center"],
+.minimal-tiptap-editor .ProseMirror h5[style*="text-align: center"],
+.minimal-tiptap-editor .ProseMirror h6[style*="text-align: center"] {
+  @apply text-center;
+}
+
+.minimal-tiptap-editor .ProseMirror p[style*="text-align: right"],
+.minimal-tiptap-editor .ProseMirror h1[style*="text-align: right"],
+.minimal-tiptap-editor .ProseMirror h2[style*="text-align: right"],
+.minimal-tiptap-editor .ProseMirror h3[style*="text-align: right"],
+.minimal-tiptap-editor .ProseMirror h4[style*="text-align: right"],
+.minimal-tiptap-editor .ProseMirror h5[style*="text-align: right"],
+.minimal-tiptap-editor .ProseMirror h6[style*="text-align: right"] {
+  @apply text-right;
+}
+
+.minimal-tiptap-editor .ProseMirror p[style*="text-align: justify"],
+.minimal-tiptap-editor .ProseMirror h1[style*="text-align: justify"],
+.minimal-tiptap-editor .ProseMirror h2[style*="text-align: justify"],
+.minimal-tiptap-editor .ProseMirror h3[style*="text-align: justify"],
+.minimal-tiptap-editor .ProseMirror h4[style*="text-align: justify"],
+.minimal-tiptap-editor .ProseMirror h5[style*="text-align: justify"],
+.minimal-tiptap-editor .ProseMirror h6[style*="text-align: justify"] {
+  @apply text-justify;
+}
