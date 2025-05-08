@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import axios from "axios";
 
 import Image from "next/image";
 import { format } from "date-fns";
@@ -70,6 +71,9 @@ interface Post {
   };
   createdAt: string;
   updatedAt: string;
+  _count?: {
+    likes: number;
+  };
 }
 
 export default function PostDetailPage() {
@@ -84,6 +88,9 @@ export default function PostDetailPage() {
     "loading" | "loaded" | "error"
   >("loading");
   const [commentRefresh, setCommentRefresh] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const [likeLoading, setLikeLoading] = useState(false);
 
   const shareLink = () => {
     navigator.clipboard.writeText(`${window.location.origin}/post/${postId}`);
@@ -94,13 +101,17 @@ export default function PostDetailPage() {
     const fetchPost = async () => {
       try {
         const response = await fetch(`/api/post/${postId}`);
-        console.log("Response:", response);
         if (!response.ok) {
           throw new Error(`Failed to fetch post: ${response.status}`);
         }
 
         const data = await response.json();
         setPost(data);
+
+        const likesCount =
+          data._count?.likes || data._count?.like || data.like?.length || 0;
+
+        setLikeCount(likesCount);
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "An unknown error occurred"
@@ -113,6 +124,49 @@ export default function PostDetailPage() {
 
     fetchPost();
   }, [postId]);
+
+  useEffect(() => {
+    const checkIfLiked = async () => {
+      if (!session?.user) return;
+
+      try {
+        const response = await axios.get(`/api/like/check/${postId}`);
+        setIsLiked(response.data.isLiked);
+      } catch (err) {
+        console.error("Error checking like status:", err);
+      }
+    };
+
+    checkIfLiked();
+  }, [postId, session]);
+
+  const toggleLike = async () => {
+    if (!session?.user) {
+      toast.error("Please sign in to like posts");
+      return;
+    }
+
+    setLikeLoading(true);
+
+    try {
+      if (isLiked) {
+        await axios.delete(`/api/like/${postId}`);
+        setIsLiked(false);
+        setLikeCount((prev) => Math.max(0, prev - 1));
+        toast.success("Post unliked");
+      } else {
+        await axios.post(`/api/like/${postId}`);
+        setIsLiked(true);
+        setLikeCount((prev) => prev + 1);
+        toast.success("Post liked");
+      }
+    } catch (err) {
+      console.error("Error toggling like:", err);
+      toast.error("Failed to update like status");
+    } finally {
+      setLikeLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (post?.cover) {
@@ -355,9 +409,21 @@ export default function PostDetailPage() {
           <div className="px-6 border-t border-gray-200 dark:border-gray-800 overflow-auto">
             <div className="flex items-center justify-between mt-5">
               <div className="flex space-x-4 items-center">
-                <Button variant="ghost" className="flex items-center space-x-2">
-                  <Heart className="h-5 w-5" />
-                  <span>Like</span>
+                <Button
+                  variant="ghost"
+                  className={`flex items-center space-x-2 ${
+                    isLiked ? "text-red-500 hover:text-red-600" : ""
+                  }`}
+                  onClick={toggleLike}
+                  disabled={likeLoading}
+                >
+                  <Heart
+                    className={`h-5 w-5 ${isLiked ? "fill-red-500" : ""}`}
+                    strokeWidth={isLiked ? 2 : 1.5}
+                  />
+                  <span>
+                    {likeCount} {likeCount === 1 ? "Like" : "Likes"}
+                  </span>
                 </Button>
                 <Button variant="ghost" className="flex items-center space-x-2">
                   <MessageSquare className="h-5 w-5" />

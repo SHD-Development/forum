@@ -18,9 +18,9 @@ model User {
     credits       Int       @default(0)
     createdAt     DateTime  @default(now())
     updatedAt     DateTime  @updatedAt
-    Post          Post[]
-    Comment       Comment[]
-    Like          Like[]
+    post          Post[]
+    comment       Comment[]
+    like          Like[]
 }
 
 model Account {
@@ -72,8 +72,8 @@ model Post {
 
     createdAt DateTime  @default(now())
     updatedAt DateTime  @updatedAt
-    Comment   Comment[]
-    Like      Like[]
+    comment   Comment[]
+    like      Like[]
 }
 
 model Comment {
@@ -89,11 +89,11 @@ model Comment {
 }
 
 model Like {
-    id       Int    @id @default(autoincrement())
-    postId   Int
-    authorId String
-    author   User   @relation(fields: [authorId], references: [id])
-    post     Post   @relation(fields: [postId], references: [id])
+    id     Int    @id @default(autoincrement())
+    postId Int
+    userId String
+    user   User   @relation(fields: [userId], references: [id])
+    post   Post   @relation(fields: [postId], references: [id])
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

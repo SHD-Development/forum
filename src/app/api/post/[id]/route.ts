@@ -27,6 +27,11 @@ export async function GET(
             image: true,
           },
         },
+        _count: {
+          select: {
+            like: true,
+          },
+        },
       },
     });
 
