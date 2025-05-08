@@ -7,6 +7,7 @@ import Underline from "@tiptap/extension-underline";
 import TextStyle from "@tiptap/extension-text-style";
 import Color from "@tiptap/extension-color";
 import TextAlign from "@tiptap/extension-text-align";
+
 interface TiptapHTMLRendererProps {
   content: any;
   className?: string;
@@ -24,7 +25,9 @@ export function TiptapHTMLRenderer({
       return generateHTML(contentToRender, [
         StarterKit,
         Link,
-        Image,
+        Image.configure({
+          HTMLAttributes: { class: "mx-auto block my-4 max-w-full" },
+        }),
         Underline,
         TextStyle.configure({ mergeNestedSpanStyles: true }),
         Color.configure({
