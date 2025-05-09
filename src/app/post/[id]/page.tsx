@@ -130,7 +130,7 @@ export default function PostDetailPage() {
       if (!session?.user) return;
 
       try {
-        const response = await axios.get(`/api/like/check/${postId}`);
+        const response = await axios.get(`/api/like/${postId}`);
         setIsLiked(response.data.isLiked);
       } catch (err) {
         console.error("Error checking like status:", err);
